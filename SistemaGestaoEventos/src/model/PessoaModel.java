@@ -3,11 +3,12 @@ package model;
 public class PessoaModel {
 	
 	private int idPessoa;
-
 	private String nomePessoa;
-	
 	private String sobrenomePessoa;
-
+	private int idSalaPrimeiraEtapa;
+	private int idSalaSegundaEtapa;
+	private int idEspacoCafe;
+	
 	public int getIdPessoa() {
 		return idPessoa;
 	}
@@ -32,12 +33,42 @@ public class PessoaModel {
 		this.sobrenomePessoa = sobrenomePessoa;
 	}
 
-	public PessoaModel(int idPessoa, String nomePessoa, String sobrenomePessoa) {
+	
+	public int getIdSalaPrimeiraEtapa() {
+		return idSalaPrimeiraEtapa;
+	}
+
+	public void setIdSalaPrimeiraEtapa(int idSalaPrimeiraEtapa) {
+		this.idSalaPrimeiraEtapa = idSalaPrimeiraEtapa;
+	}
+
+	public int getIdSalaSegundaEtapa() {
+		return idSalaSegundaEtapa;
+	}
+
+	public void setIdSalaSegundaEtapa(int idSalaSegundaEtapa) {
+		this.idSalaSegundaEtapa = idSalaSegundaEtapa;
+	}
+
+	public int getIdEspacoCafe() {
+		return idEspacoCafe;
+	}
+
+	public void setIdEspacoCafe(int idEspacoCafe) {
+		this.idEspacoCafe = idEspacoCafe;
+	}
+	
+	public PessoaModel(int idPessoa, String nomePessoa, String sobrenomePessoa, int idSalaPrimeiraEtapa,
+			int idSalaSegundaEtapa, int idEspacoCafe) {
+		super();
 		this.idPessoa = idPessoa;
 		this.nomePessoa = nomePessoa;
 		this.sobrenomePessoa = sobrenomePessoa;
+		this.idSalaPrimeiraEtapa = idSalaPrimeiraEtapa;
+		this.idSalaSegundaEtapa = idSalaSegundaEtapa;
+		this.idEspacoCafe = idEspacoCafe;
 	}
-	
+
 	public PessoaModel() {
 
 	}
