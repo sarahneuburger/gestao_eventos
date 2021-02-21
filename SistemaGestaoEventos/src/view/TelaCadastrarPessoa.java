@@ -9,25 +9,20 @@ import javax.swing.border.EmptyBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-
-import connection.Conexao;
 import controller.GestaoEventosController;
-
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-
+import java.sql.SQLException;
+import java.text.ParseException;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 public class TelaCadastrarPessoa extends JFrame {
-
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -36,7 +31,6 @@ public class TelaCadastrarPessoa extends JFrame {
 	private JTextField tfCampoPrimeiraSala;
 	private JTextField tfCampoSegundaSala;
 	private JTextField tfEspaco;
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -141,35 +135,24 @@ public class TelaCadastrarPessoa extends JFrame {
 			}
 		});
 		baseTelaCadastrarPessoa.add(btnVoltar, "3, 16");
-		
+
 		JButton btnCadastrarPessoa = new JButton("Cadastrar");
 		btnCadastrarPessoa.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			// Método para cadastrar pessoa
-			String nomePessoa = tfCampoNome.getText();
-			String sobrenomePessoa = tfCampoSobrenome.getText();
-			int idSalaPrimeiraEtapa = Integer.parseInt(tfCampoPrimeiraSala.getText());
-			int idSalaSegundaEtapa = Integer.parseInt(tfCampoSegundaSala.getText());
-			int idEspacoCafe = Integer.parseInt(tfEspaco.getText());
+			public void actionPerformed(ActionEvent e) {
+				GestaoEventosController controller = new GestaoEventosController();
 				try {
-				Conexao conexao = new Conexao();
-				String sql = "INSERT INTO gestaoeventos.pessoas (nomePessoa, sobrenomePessoa, idSalaPrimeiraEtapa, idSalaSegundaEtapa, idEspacoCafe) VALUES (?, ?, ?, ?, ?)";
-				PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-				pstmt.setString(1, nomePessoa);
-				pstmt.setString(2, sobrenomePessoa);
-				pstmt.setInt(3, idSalaPrimeiraEtapa);
-				pstmt.setInt(4, idSalaSegundaEtapa);
-				pstmt.setInt(5, idEspacoCafe);
-				pstmt.execute();
-				
-				JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso.");
-				} catch (Exception erro) {
+					controller.CadastrarPessoa(tfCampoNome.getText(), tfCampoSobrenome.getText(),
+							tfCampoPrimeiraSala.getText(), tfCampoSegundaSala.getText(), tfEspaco.getText());
+					JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso.");
+				} catch (SQLException erro) {
 					JOptionPane.showMessageDialog(null, "Falha ao cadastrar pessoa.");
 					System.out.println(erro.getMessage());
+				} catch (ParseException erro) {
+					System.out.println(erro.getMessage());
 				}
-			
-		}
-	});
+
+			}
+		});
 		baseTelaCadastrarPessoa.add(btnCadastrarPessoa, "3, 14");
 		
 	}

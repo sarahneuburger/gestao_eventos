@@ -18,6 +18,8 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -65,13 +67,21 @@ public class TelaInicial extends JFrame {
 			new RowSpec[] {
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("5dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
 				RowSpec.decode("default:grow"),}));
 		
@@ -80,51 +90,18 @@ public class TelaInicial extends JFrame {
 		lblCadastros.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel.add(lblCadastros, "2, 2");
 		
-		JButton btnCadPessoa = new JButton("Pessoas");
-		btnCadPessoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaCadastrarPessoa frameCadPessoa = new TelaCadastrarPessoa();
-				frameCadPessoa.setVisible(true);
-			}
-		});
-		panel.add(btnCadPessoa, "2, 3");
-		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/img/imgTelaInicial3.png")));
 		panel.add(lblNewLabel_1, "4, 2, 2, 9, fill, fill");
 		
-		JButton btnCadSalaEvento = new JButton("Sala de Eventos");
-		btnCadSalaEvento.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
-				TelaCadastrarSala frameCadSala = new TelaCadastrarSala();
-				frameCadSala.setVisible(true);
-			}
-		});
-		panel.add(btnCadSalaEvento, "2, 4");
-		
-		JButton btnCadEspacoCafe = new JButton("Espa\u00E7os Caf\u00E9");
-		btnCadEspacoCafe.addActionListener(new ActionListener() {
+		JButton btnConsultaEspacoCafe = new JButton("Espa\u00E7os de Caf\u00E9");
+		btnConsultaEspacoCafe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastrarEspaco frameCadEspaco = new TelaCadastrarEspaco();
-				frameCadEspaco.setVisible(true);
+				TelaConsultarEspacos frameConsEspaco = new TelaConsultarEspacos();
+				frameConsEspaco.setVisible(true);
 			}
 		});
-		panel.add(btnCadEspacoCafe, "2, 5");
-		
-		JLabel lblNewLabel = new JLabel("Consultas");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		panel.add(lblNewLabel, "2, 7");
-		
-		JButton btnConsultaPessoa = new JButton("Pessoas");
-		btnConsultaPessoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaConsultarPessoas frameConsPessoa = new TelaConsultarPessoas();
-				frameConsPessoa.setVisible(true);
-			}
-		});
-		panel.add(btnConsultaPessoa, "2, 8");
 		
 		JButton btnConsultaSalaEventos = new JButton("Sala de Eventos");
 		btnConsultaSalaEventos.addActionListener(new ActionListener() {
@@ -133,16 +110,58 @@ public class TelaInicial extends JFrame {
 				frameConsSala.setVisible(true);
 			}
 		});
-		panel.add(btnConsultaSalaEventos, "2, 9");
 		
-		JButton btnConsultaEspacoCafe = new JButton("Espa\u00E7os Caf\u00E9");
-		btnConsultaEspacoCafe.addActionListener(new ActionListener() {
+		JButton btnConsultaPessoa = new JButton("Pessoas");
+		btnConsultaPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaConsultarEspacos frameConsEspaco = new TelaConsultarEspacos();
-				frameConsEspaco.setVisible(true);
+				TelaConsultarPessoas frameConsPessoa = null;
+				try {
+					frameConsPessoa = new TelaConsultarPessoas();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				frameConsPessoa.setVisible(true);
 			}
 		});
-		panel.add(btnConsultaEspacoCafe, "2, 10");
+		
+		JButton btnCadPessoa = new JButton("Pessoas");
+		btnCadPessoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastrarPessoa frameCadPessoa = new TelaCadastrarPessoa();
+				frameCadPessoa.setVisible(true);
+			}
+		});
+		panel.add(btnCadPessoa, "2, 4");
+		
+		JButton btnCadSalaEvento = new JButton("Sala de Eventos");
+		btnCadSalaEvento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				TelaCadastrarSala frameCadSala = new TelaCadastrarSala();
+				frameCadSala.setVisible(true);
+			}
+		});
+		panel.add(btnCadSalaEvento, "2, 6");
+		
+		JButton btnCadEspacoCafe = new JButton("Espa\u00E7os de Caf\u00E9");
+		btnCadEspacoCafe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastrarEspaco frameCadEspaco = new TelaCadastrarEspaco();
+				frameCadEspaco.setVisible(true);
+			}
+		});
+		panel.add(btnCadEspacoCafe, "2, 8");
+		
+		JLabel lblNewLabel = new JLabel("Consultas");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		panel.add(lblNewLabel, "2, 12");
+		panel.add(btnConsultaPessoa, "2, 14");
+		panel.add(btnConsultaSalaEventos, "2, 16");
+		panel.add(btnConsultaEspacoCafe, "2, 18");
 	}
 
 }

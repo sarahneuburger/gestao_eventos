@@ -2,15 +2,20 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import controller.GestaoEventosController;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -21,7 +26,6 @@ public class TelaCadastrarSala extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfNomeSala;
 	private JTextField tfLotacaoSala;
-
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -84,6 +88,22 @@ public class TelaCadastrarSala extends JFrame {
 		baseCadastrarSalas.add(tfLotacaoSala, "3, 6, fill, default");
 		
 		JButton btnCadastrarSala = new JButton("Cadastrar");
+		btnCadastrarSala.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GestaoEventosController controller = new GestaoEventosController();
+				try {
+					controller.CadastrarSalaEvento(tfNomeSala.getText(), tfLotacaoSala.getText());
+					JOptionPane.showMessageDialog(null, "Sala de evento cadastrada com sucesso.");
+				} catch (SQLException erro) {
+					JOptionPane.showMessageDialog(null, "Falha ao cadastrar sala de evento.");
+					System.out.println(erro.getMessage());
+
+				} catch (ParseException erro) {
+					System.out.println(erro.getMessage());
+				}
+
+			}
+		});
 		baseCadastrarSalas.add(btnCadastrarSala, "3, 8");
 	}
 

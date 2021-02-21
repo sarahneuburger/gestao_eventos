@@ -9,14 +9,24 @@ import javax.swing.border.EmptyBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import controller.GestaoEventosController;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.text.ParseException;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class TelaConsultarPessoas extends JFrame {
 
@@ -39,7 +49,7 @@ public class TelaConsultarPessoas extends JFrame {
 		});
 	}
 
-	public TelaConsultarPessoas() {
+	public TelaConsultarPessoas() throws SQLException, ParseException {
 		setTitle("Consultar Pessoas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,7 +73,7 @@ public class TelaConsultarPessoas extends JFrame {
 				FormSpecs.DEFAULT_ROWSPEC,
 				RowSpec.decode("8dlu"),
 				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("10dlu"),
 				RowSpec.decode("default:grow"),
 				RowSpec.decode("10dlu"),}));
 		
@@ -116,24 +126,40 @@ public class TelaConsultarPessoas extends JFrame {
 			new RowSpec[] {
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
-		JButton btnPesquisarPessoa = new JButton("Pesquisar");
-		baseBotaoPesquisarPessoa.add(btnPesquisarPessoa, "4, 1");
+		JScrollPane tabela = new JScrollPane();
+		baseConsultarPessoas.add(tabela, "2, 10, fill, fill");
 		
-		tabelaPessoas = new JTable();
-		tabelaPessoas.setShowHorizontalLines(false);
-		tabelaPessoas.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-				{null, null, null, null, null, null},
-			},
-			new String[] {
-				"C\u00F3digo", "Nome", "Sobrenome", "Sala 1\u00AA Etapa", "Sala 2\u00AA Etapa", "Espa\u00E7o Caf\u00E9"
+		JButton btnPesquisarPessoa = new JButton("Pesquisar");
+		btnPesquisarPessoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GestaoEventosController controller = new GestaoEventosController();
+				try {
+					if(tfIdPessoa.getText() != null && tfNomePessoaPesquisar.getText() == null) {
+						controller.ConsultarPessoasID(tfIdPessoa.getText());
+						tabelaPessoas.setModel(controller.ConsultarPessoasID(tfIdPessoa.getText()));
+						tabela.setViewportView(tabelaPessoas);
+					} else if (tfNomePessoaPesquisar.getText() != null && tfIdPessoa.getText() == null) {
+						controller.ConsultarPessoasNome(tfNomePessoaPesquisar.getText());
+						tabelaPessoas.setModel(controller.ConsultarPessoasNome(tfNomePessoaPesquisar.getText()));
+						tabela.setViewportView(tabelaPessoas);
+					} else {
+						JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
+					}
+				} catch (SQLException erro) {
+					JOptionPane.showMessageDialog(null, "Falha ao consultar pessoa.");
+					System.out.println(erro.getMessage());
+				} catch (ParseException erro) {
+					System.out.println(erro.getMessage());
+				}
+
 			}
-		));
-		tabelaPessoas.setColumnSelectionAllowed(true);
-		tabelaPessoas.setCellSelectionEnabled(true);
-		baseConsultarPessoas.add(tabelaPessoas, "2, 10, fill, fill");
+		});
+		baseBotaoPesquisarPessoa.add(btnPesquisarPessoa, "4, 1");
+			
+		tabelaPessoas = new JTable();
+		GestaoEventosController controller = new GestaoEventosController();
+		tabelaPessoas.setModel(controller.VisualizarPessoas());
+		tabela.setViewportView(tabelaPessoas);
 	}
 
 }

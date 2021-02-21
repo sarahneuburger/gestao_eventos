@@ -18,7 +18,7 @@ public class Conexao {
 
 		try {
 
-			String url = "jdbc:mysql://localhost:3306/gestaoEventos";
+			String url = "jdbc:mysql://localhost:3306/gestaoeventos";
 			String usuario = "root";
 			String senha = "123456";
 

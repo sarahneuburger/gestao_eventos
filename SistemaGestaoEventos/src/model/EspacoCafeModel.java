@@ -23,7 +23,6 @@ public class EspacoCafeModel {
 	}
 
 	public EspacoCafeModel(int idEspacoCafe, String nomeEspacoCafe) {
-		super();
 		this.idEspacoCafe = idEspacoCafe;
 		this.nomeEspacoCafe = nomeEspacoCafe;
 	}

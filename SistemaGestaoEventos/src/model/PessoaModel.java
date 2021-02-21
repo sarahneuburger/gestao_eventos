@@ -60,7 +60,6 @@ public class PessoaModel {
 	
 	public PessoaModel(int idPessoa, String nomePessoa, String sobrenomePessoa, int idSalaPrimeiraEtapa,
 			int idSalaSegundaEtapa, int idEspacoCafe) {
-		super();
 		this.idPessoa = idPessoa;
 		this.nomePessoa = nomePessoa;
 		this.sobrenomePessoa = sobrenomePessoa;

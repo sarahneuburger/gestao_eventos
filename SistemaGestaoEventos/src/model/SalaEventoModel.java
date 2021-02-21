@@ -6,7 +6,7 @@ public class SalaEventoModel {
 	
 	private String nomeSalaEvento;
 	
-	private String lotacaoSalaEvento;
+	private int lotacaoSalaEvento;
 
 	public int getIdSalaEvento() {
 		return idSalaEvento;
@@ -24,15 +24,15 @@ public class SalaEventoModel {
 		this.nomeSalaEvento = nomeSalaEvento;
 	}
 
-	public String getLotacaoSalaEvento() {
+	public int getLotacaoSalaEvento() {
 		return lotacaoSalaEvento;
 	}
 
-	public void setLotacaoSalaEvento(String lotacaoSalaEvento) {
+	public void setLotacaoSalaEvento(int lotacaoSalaEvento) {
 		this.lotacaoSalaEvento = lotacaoSalaEvento;
 	}
 
-	public SalaEventoModel(int idSalaEvento, String nomeSalaEvento, String lotacaoSalaEvento) {
+	public SalaEventoModel(int idSalaEvento, String nomeSalaEvento, int lotacaoSalaEvento) {
 		this.idSalaEvento = idSalaEvento;
 		this.nomeSalaEvento = nomeSalaEvento;
 		this.lotacaoSalaEvento = lotacaoSalaEvento;

@@ -1,59 +1,66 @@
 package controller;
 
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
 
-import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
-import connection.Conexao;
 import model.EspacoCafeModel;
+import model.GestaoEventosDAO;
 import model.PessoaModel;
 import model.SalaEventoModel;
-import view.TelaCadastrarEspaco;
-import view.TelaCadastrarPessoa;
-import view.TelaCadastrarSala;
-import view.TelaConsultarEspacos;
-import view.TelaConsultarPessoas;
-import view.TelaConsultarSalas;
+
 
 public class GestaoEventosController {
+		
+	// Métodos para interação entre interface e Banco de Dados
 	
-	private PessoaModel pessoaModel = new PessoaModel();
-	private SalaEventoModel salaModel;
-	private EspacoCafeModel espacoModel;
-	private TelaCadastrarPessoa cadPessoaView = new TelaCadastrarPessoa();
-	private TelaCadastrarSala cadSalaView;
-	private TelaCadastrarEspaco cadEspacoView;
-	private TelaConsultarPessoas consultPessoaView;
-	private TelaConsultarSalas consultSalaView;
-	private TelaConsultarEspacos consultEspacoView;
+	// Método para cadastrar pessoa
+	public void CadastrarPessoa(String nomePessoa, String sobrenomePessoa, String idSalaPrimeiraEtapa, String idSalaSegundaEtapa, 
+			String idEspacoCafe) throws SQLException, ParseException {
+		PessoaModel pessoa = new PessoaModel();
+		pessoa.setNomePessoa(nomePessoa);
+		pessoa.setSobrenomePessoa(sobrenomePessoa);
+		pessoa.setIdSalaPrimeiraEtapa(Integer.parseInt(idSalaPrimeiraEtapa));
+		pessoa.setIdSalaSegundaEtapa(Integer.parseInt(idSalaSegundaEtapa));
+		pessoa.setIdEspacoCafe(Integer.parseInt(idEspacoCafe));
+		new GestaoEventosDAO().CadastrarPessoa(pessoa);	
+	}
 	
-	// Métodos
-	
-//	// Método para cadastrar pessoa
-//	public void CadastrarPessoa() {
-//		
-//		pessoaModel.setNomePessoa(cadPessoaView.tfCampoNome.getText());
-//		pessoaModel.setSobrenomePessoa(cadPessoaView.tfCampoSobrenome.getText());
-//		pessoaModel.setIdSalaPrimeiraEtapa(Integer.parseInt(cadPessoaView.tfCampoPrimeiraSala.getText()));
-//		pessoaModel.setIdSalaSegundaEtapa(Integer.parseInt(cadPessoaView.tfCampoSegundaSala.getText()));
-//		pessoaModel.setIdEspacoCafe(Integer.parseInt(cadPessoaView.tfEspaco.getText()));
-//			try {
-//			Conexao conexao = new Conexao();
-//			String sql = "INSERT INTO gestaoeventos.pessoas (nomePessoa, sobrenomePessoa, idSalaPrimeiraEtapa, idSalaSegundaEtapa, idEspacoCafe) VALUES (?, ?, ?, ?, ?)";
-//			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql);
-//			pstmt.setString(1, pessoaModel.getNomePessoa());
-//			pstmt.setString(2, pessoaModel.getSobrenomePessoa());
-//			pstmt.setInt(3, pessoaModel.getIdSalaPrimeiraEtapa());
-//			pstmt.setInt(4, pessoaModel.getIdSalaSegundaEtapa());
-//			pstmt.setInt(5, pessoaModel.getIdEspacoCafe());
-//			pstmt.execute();
-//			
-//			JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso.");
-//			} catch (Exception erro) {
-//				JOptionPane.showMessageDialog(null, "Falha ao cadastrar pessoa.");
-//				System.out.println(erro.getMessage());
-//			}
-//			
-//		}
+	// Método para cadastrar sala de evento
+	public void CadastrarSalaEvento(String nomeSalaEvento, String lotacaoSalaEvento) throws SQLException, ParseException {
+		SalaEventoModel salaEventoModel = new SalaEventoModel();
+		salaEventoModel.setNomeSalaEvento(nomeSalaEvento);
+		salaEventoModel.setLotacaoSalaEvento(Integer.parseInt(lotacaoSalaEvento));
+		new GestaoEventosDAO().CadastrarSalaEvento(salaEventoModel);	
 	}
 
+	// Método para cadastrar espaço de café
+	public void CadastrarEspacoCafe(String nomeEspacoCafe) throws SQLException, ParseException {
+		EspacoCafeModel espacoCafeModel = new EspacoCafeModel();
+		espacoCafeModel.setNomeEspacoCafe(nomeEspacoCafe);
+		new GestaoEventosDAO().CadastrarEspacoCafe(espacoCafeModel);	
+	}
+	
+	// Método para visualizar a tabela de pessoas
+	public TableModel VisualizarPessoas() throws SQLException, ParseException {
+		return new GestaoEventosDAO().VisualizarPessoas();
+		
+	}
+	
+	// Método para consultar pessoas conforme parâmetros de ID
+	public TableModel ConsultarPessoasID(String idPesquisa) throws SQLException, ParseException {
+		int converteID = Integer.parseInt(idPesquisa);
+		return new GestaoEventosDAO().ConsultarPessoasID(converteID);
+		
+	}
+	
+	// Método para consultar pessoas conforme parâmetros de nome
+	public TableModel ConsultarPessoasNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().ConsultarPessoasNome(nomePessoa);
+		
+	}
+	
+}
