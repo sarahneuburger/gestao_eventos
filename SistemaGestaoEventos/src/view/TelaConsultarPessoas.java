@@ -134,12 +134,10 @@ public class TelaConsultarPessoas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
-					if(tfIdPessoa.getText() != null && tfNomePessoaPesquisar.getText() == null) {
-						controller.ConsultarPessoasID(tfIdPessoa.getText());
+					if(tfIdPessoa.getText().length() > 0 && tfNomePessoaPesquisar.getText().length() == 0) {
 						tabelaPessoas.setModel(controller.ConsultarPessoasID(tfIdPessoa.getText()));
 						tabela.setViewportView(tabelaPessoas);
-					} else if (tfNomePessoaPesquisar.getText() != null && tfIdPessoa.getText() == null) {
-						controller.ConsultarPessoasNome(tfNomePessoaPesquisar.getText());
+					} else if (tfNomePessoaPesquisar.getText().length() > 1 && tfIdPessoa.getText().length() == 0) {
 						tabelaPessoas.setModel(controller.ConsultarPessoasNome(tfNomePessoaPesquisar.getText()));
 						tabela.setViewportView(tabelaPessoas);
 					} else {

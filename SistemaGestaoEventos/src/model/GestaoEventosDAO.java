@@ -87,12 +87,11 @@ public class GestaoEventosDAO {
 		dados.addColumn("ID Sala 2ª Etapa");
 		dados.addColumn("ID Espaço Café");
 		try {
-			String sql5 = "select * from gestaoeventos.pessoas where idPessoa = ?";
+			String sql5 = "SELECT * FROM gestaoeventos.pessoas WHERE idPessoa = " + idPesquisa;
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql5);
-			pstmt.setInt(1, idPesquisa);
 			ResultSet rs = pstmt.executeQuery(sql5);
 			while (rs.next()) {
-				dados.addRow(new Object[] { rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
 						rs.getInt(6) });
 			}
 		} catch (Exception erro) {
@@ -110,17 +109,19 @@ public class GestaoEventosDAO {
 		dados.addColumn("ID Sala 2ª Etapa");
 		dados.addColumn("ID Espaço Café");
 		try {
-			String sql6 = "select * from gestaoeventos.pessoas where nomePessoa = ?";
+			String sql6 = "SELECT * FROM gestaoeventos.pessoas WHERE nomePessoa = '" + nomePesquisa + "'";
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql6);
-			pstmt.setString(1, nomePesquisa);
 			ResultSet rs = pstmt.executeQuery(sql6);
 			while (rs.next()) {
-				dados.addRow(new Object[] { rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
+				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5),
 						rs.getInt(6) });
 			}
+			rs.close();
+			pstmt.close();
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
 		}
+
 		return dados;
 	}
 }
