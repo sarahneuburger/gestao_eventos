@@ -1,8 +1,6 @@
 package controller;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 
 import javax.swing.table.TableModel;
@@ -61,6 +59,57 @@ public class GestaoEventosController {
 	public TableModel ConsultarPessoasNome(String nomePessoa) throws SQLException, ParseException {
 		return new GestaoEventosDAO().ConsultarPessoasNome(nomePessoa);
 		
+	}
+	
+	// Método para visualizar a tabela de espaços de café
+	public TableModel VisualizarEspacos() throws SQLException, ParseException {
+		return new GestaoEventosDAO().VisualizarEspacos();
+		
+	}
+	
+	// Método para consultar espaços conforme parâmetros de ID
+		public TableModel ConsultarEspacosID(String idPesquisa) throws SQLException, ParseException {
+			int converteID = Integer.parseInt(idPesquisa);
+			return new GestaoEventosDAO().ConsultarEspacoID(converteID);
+			
+	}
+		
+	// Método para consultar espaços conforme parâmetros de nome
+	public TableModel ConsultarEspacosNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().ConsultarEspacoNome(nomePessoa);
+	
+	}
+	
+	
+	// Método para visualizar a tabela de salas de eventos
+	public TableModel VisualizarSalas() throws SQLException, ParseException {
+		return new GestaoEventosDAO().VisualizarSalas();
+		
+	}
+	
+	// Método para consultar salas da PRIMEIRA ETAPA conforme parâmetros de ID
+	public TableModel ConsultarSalaPrimeiraID(String idPesquisa) throws SQLException, ParseException {
+		int converteID = Integer.parseInt(idPesquisa);
+		return new GestaoEventosDAO().ConsultarSalaPrimeiraID(converteID);
+	}
+	
+	
+	// Método para consultar salas da PRIMEIRA ETAPA conforme parâmetros de nome
+	public TableModel ConsultarSalaPrimeiraNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().ConsultarSalaPrimeiraNome(nomePessoa);
+	}
+	
+	
+	// Método para consultar salas da SEGUNDA ETAPA conforme parâmetros de ID
+	public TableModel ConsultarSalaSegundaID(String idPesquisa) throws SQLException, ParseException {
+		int converteID = Integer.parseInt(idPesquisa);
+		return new GestaoEventosDAO().ConsultarSalaSegundaID(converteID);
+	}
+	
+	
+	// Método para consultar salas da SEGUNDA ETAPA conforme parâmetros de nome
+	public TableModel ConsultarSalaSegundaNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().ConsultarSalaSegundaNome(nomePessoa);
 	}
 	
 }

@@ -15,14 +15,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import javax.swing.JScrollPane;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 
 
 public class TelaInicial extends JFrame {
@@ -98,7 +94,14 @@ public class TelaInicial extends JFrame {
 		JButton btnConsultaEspacoCafe = new JButton("Espa\u00E7os de Caf\u00E9");
 		btnConsultaEspacoCafe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaConsultarEspacos frameConsEspaco = new TelaConsultarEspacos();
+				TelaConsultarEspacos frameConsEspaco = null;
+				try {
+					frameConsEspaco = new TelaConsultarEspacos();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 				frameConsEspaco.setVisible(true);
 			}
 		});
@@ -106,7 +109,14 @@ public class TelaInicial extends JFrame {
 		JButton btnConsultaSalaEventos = new JButton("Sala de Eventos");
 		btnConsultaSalaEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaConsultarSalas frameConsSala = new TelaConsultarSalas();
+				TelaConsultarSalas frameConsSala = null;
+				try {
+					frameConsSala = new TelaConsultarSalas();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 				frameConsSala.setVisible(true);
 			}
 		});
@@ -118,10 +128,8 @@ public class TelaInicial extends JFrame {
 				try {
 					frameConsPessoa = new TelaConsultarPessoas();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				frameConsPessoa.setVisible(true);
