@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 public class TelaConsultarPessoas extends JFrame {
 
@@ -50,8 +51,9 @@ public class TelaConsultarPessoas extends JFrame {
 	}
 
 	public TelaConsultarPessoas() throws SQLException, ParseException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaConsultarPessoas.class.getResource("/img/imgTelaInicial3.png")));
 		setTitle("Consultar Pessoas");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

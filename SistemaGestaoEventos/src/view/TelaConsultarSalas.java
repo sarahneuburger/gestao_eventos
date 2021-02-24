@@ -25,6 +25,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import controller.GestaoEventosController;
 
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 public class TelaConsultarSalas extends JFrame {
 
@@ -50,8 +51,9 @@ public class TelaConsultarSalas extends JFrame {
 	}
 
 	public TelaConsultarSalas() throws SQLException, ParseException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaConsultarSalas.class.getResource("/img/imgTelaInicial3.png")));
 		setTitle("Consultar Salas de Eventos");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 340);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -152,8 +154,7 @@ public class TelaConsultarSalas extends JFrame {
 		btnPesquisarSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
-				try {
-					
+				try {	
 					if (Integer.parseInt(tfEtapaSala.getText()) == 1) {
 						if (tfIdSala.getText().length() > 0 && tfNomeSalaPesquisar.getText().length() == 0) {
 							tabelaSalas.setModel(controller.ConsultarSalaPrimeiraID(tfIdSala.getText()));

@@ -19,6 +19,7 @@ import java.text.ParseException;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class TelaCadastrarSala extends JFrame {
 
@@ -41,8 +42,9 @@ public class TelaCadastrarSala extends JFrame {
 	}
 
 	public TelaCadastrarSala() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastrarSala.class.getResource("/img/imgTelaInicial3.png")));
 		setTitle("Cadastrar Salas");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,8 +55,8 @@ public class TelaCadastrarSala extends JFrame {
 		contentPane.add(baseCadastrarSalas, BorderLayout.CENTER);
 		baseCadastrarSalas.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("10dlu"),
-				ColumnSpec.decode("max(58dlu;default)"),
-				ColumnSpec.decode("max(169dlu;default):grow"),
+				ColumnSpec.decode("58dlu"),
+				ColumnSpec.decode("140dlu"),
 				ColumnSpec.decode("40dlu"),},
 			new RowSpec[] {
 				RowSpec.decode("10dlu"),
@@ -92,8 +94,15 @@ public class TelaCadastrarSala extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
+					if ((tfNomeSala.getText() == null || tfNomeSala.getText().trim().isEmpty())
+						|| (tfLotacaoSala.getText() == null || tfLotacaoSala.getText().trim().isEmpty())) {
+						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+					} else {			
 					controller.CadastrarSalaEvento(tfNomeSala.getText(), tfLotacaoSala.getText());
 					JOptionPane.showMessageDialog(null, "Sala de evento cadastrada com sucesso.");
+					tfNomeSala.setText("");
+					tfLotacaoSala.setText("");
+					}
 				} catch (SQLException erro) {
 					JOptionPane.showMessageDialog(null, "Falha ao cadastrar sala de evento.");
 					System.out.println(erro.getMessage());

@@ -25,6 +25,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import controller.GestaoEventosController;
 
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 public class TelaConsultarEspacos extends JFrame {
 
@@ -34,6 +35,7 @@ public class TelaConsultarEspacos extends JFrame {
 	private JTextField tfIdEspaco;
 	private JTextField tfNomeEspacoPesquisar;
 	private JTable tabelaEspacos;
+	private JTextField tfEspacoEtapa;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,9 +51,10 @@ public class TelaConsultarEspacos extends JFrame {
 	}
 
 	public TelaConsultarEspacos() throws SQLException, ParseException {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaConsultarEspacos.class.getResource("/img/imgTelaInicial3.png")));
 		setTitle("Consultar Espa\u00E7os de Caf\u00E9");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 346);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -59,22 +62,14 @@ public class TelaConsultarEspacos extends JFrame {
 
 		JPanel baseConsultarEspacos = new JPanel();
 		contentPane.add(baseConsultarEspacos, BorderLayout.CENTER);
-		baseConsultarEspacos.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("10dlu"),
-				ColumnSpec.decode("default:grow"),
-				ColumnSpec.decode("10dlu"),},
-			new RowSpec[] {
-				RowSpec.decode("10dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("10dlu"),
-				RowSpec.decode("default:grow"),
-				RowSpec.decode("10dlu"),}));
+		baseConsultarEspacos.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("10dlu"), ColumnSpec.decode("default:grow"),
+						ColumnSpec.decode("10dlu"), },
+				new RowSpec[] { RowSpec.decode("10dlu"), FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("8dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("8dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						RowSpec.decode("8dlu"), RowSpec.decode("default:grow"), RowSpec.decode("10dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("10dlu"), RowSpec.decode("default:grow"),
+						RowSpec.decode("10dlu"), }));
 
 		JLabel lblConsultarEspaco = new JLabel("Consulta de Espa\u00E7os de Caf\u00E9");
 		lblConsultarEspaco.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -113,43 +108,68 @@ public class TelaConsultarEspacos extends JFrame {
 		tfNomeEspacoPesquisar = new JTextField();
 		baseNomeEspaco.add(tfNomeEspacoPesquisar, "2, 1, fill, default");
 		tfNomeEspacoPesquisar.setColumns(10);
+		GestaoEventosController controller = new GestaoEventosController();
+
+		JPanel panel = new JPanel();
+		baseConsultarEspacos.add(panel, "2, 8, fill, fill");
+		panel.setLayout(new FormLayout(new ColumnSpec[] { ColumnSpec.decode("max(94dlu;default)"),
+				ColumnSpec.decode("default:grow"), ColumnSpec.decode("23dlu"), },
+				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, }));
+
+		JLabel lblEspacoEtapa = new JLabel("Etapa (sendo 1 ou 2)*:    ");
+		lblEspacoEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(lblEspacoEtapa, "1, 1, right, default");
+
+		tfEspacoEtapa = new JTextField();
+		tfEspacoEtapa.setColumns(10);
+		panel.add(tfEspacoEtapa, "2, 1, fill, default");
 
 		JPanel baseBotaoPesquisarEspaco = new JPanel();
-		baseConsultarEspacos.add(baseBotaoPesquisarEspaco, "2, 8, fill, fill");
+		baseConsultarEspacos.add(baseBotaoPesquisarEspaco, "2, 10, fill, fill");
 		baseBotaoPesquisarEspaco.setLayout(new FormLayout(new ColumnSpec[] { FormSpecs.DEFAULT_COLSPEC,
 				ColumnSpec.decode("default:grow"), ColumnSpec.decode("default:grow"), ColumnSpec.decode("default:grow"),
 				ColumnSpec.decode("23dlu"), }, new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, }));
 
 		JScrollPane tabela = new JScrollPane();
-		baseConsultarEspacos.add(tabela, "2, 10, fill, fill");
+		baseConsultarEspacos.add(tabela, "2, 12, fill, fill");
 
 		JButton btnPesquisarEspaco = new JButton("Pesquisar");
 		btnPesquisarEspaco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
-					if (tfIdEspaco.getText().length() > 0 && tfNomeEspacoPesquisar.getText().length() == 0) {
-						tabelaEspacos.setModel(controller.ConsultarEspacosID(tfIdEspaco.getText()));
-						tabela.setViewportView(tabelaEspacos);
-					} else if (tfNomeEspacoPesquisar.getText().length() > 1 && tfIdEspaco.getText().length() == 0) {
-						tabelaEspacos.setModel(controller.ConsultarEspacosNome(tfNomeEspacoPesquisar.getText()));
-						tabela.setViewportView(tabelaEspacos);
-					} else {
-						JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
+					if (Integer.parseInt(tfEspacoEtapa.getText()) == 1) {
+						if (tfIdEspaco.getText().length() > 0 && tfNomeEspacoPesquisar.getText().length() == 0) {
+							tabelaEspacos.setModel(controller.ConsultarEspacoPrimeiraID(tfIdEspaco.getText()));
+							tabela.setViewportView(tabelaEspacos);
+						} else if (tfNomeEspacoPesquisar.getText().length() > 1 && tfIdEspaco.getText().length() == 0) {
+							tabelaEspacos.setModel(controller.ConsultarEspacoPrimeiraNome(tfNomeEspacoPesquisar.getText()));
+							tabela.setViewportView(tabelaEspacos);
+						} else {
+							JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
+						}
+					} else if (Integer.parseInt(tfEspacoEtapa.getText()) == 2) {
+						if (tfIdEspaco.getText().length() > 0 && tfNomeEspacoPesquisar.getText().length() == 0) {
+							tabelaEspacos.setModel(controller.ConsultarEspacoSegundaID(tfIdEspaco.getText()));
+							tabela.setViewportView(tabelaEspacos);
+						} else if (tfNomeEspacoPesquisar.getText().length() > 1 && tfIdEspaco.getText().length() == 0) {
+							tabelaEspacos.setModel(controller.ConsultarEspacoSegundaNome(tfNomeEspacoPesquisar.getText()));
+							tabela.setViewportView(tabelaEspacos);
+						} else {
+							JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
+						}
 					}
 				} catch (SQLException erro) {
-					JOptionPane.showMessageDialog(null, "Falha ao consultar espaço.");
+					JOptionPane.showMessageDialog(null, "Falha ao consultar sala.");
 					System.out.println(erro.getMessage());
 				} catch (ParseException erro) {
 					System.out.println(erro.getMessage());
 				}
-
 			}
 		});
 		baseBotaoPesquisarEspaco.add(btnPesquisarEspaco, "4, 1");
 
 		tabelaEspacos = new JTable();
-		GestaoEventosController controller = new GestaoEventosController();
 		tabelaEspacos.setModel(controller.VisualizarEspacos());
 		tabela.setViewportView(tabelaEspacos);
 	}

@@ -25,6 +25,7 @@ import java.text.ParseException;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class TelaCadastrarEspaco extends JFrame {
 
@@ -46,8 +47,9 @@ public class TelaCadastrarEspaco extends JFrame {
 	}
 
 	public TelaCadastrarEspaco() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastrarEspaco.class.getResource("/img/imgTelaInicial3.png")));
 		setTitle("Cadastrar Espa\u00E7os de Caf\u00E9");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -87,8 +89,13 @@ public class TelaCadastrarEspaco extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
+					if (tfNomeEspaco.getText() == null || tfNomeEspaco.getText().trim().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+					} else {
 					controller.CadastrarEspacoCafe(tfNomeEspaco.getText());
 					JOptionPane.showMessageDialog(null, "Espaço de café cadastrada com sucesso.");
+					tfNomeEspaco.setText("");
+					}
 				} catch (SQLException erro) {
 					JOptionPane.showMessageDialog(null, "Falha ao cadastrar espaço de café.");
 					System.out.println(erro.getMessage());

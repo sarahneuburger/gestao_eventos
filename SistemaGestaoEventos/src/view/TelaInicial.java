@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 
 public class TelaInicial extends JFrame {
@@ -41,6 +42,7 @@ public class TelaInicial extends JFrame {
 
 	
 	public TelaInicial() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaInicial.class.getResource("/img/imgTelaInicial3.png")));
 		setTitle("Sistema de Gest\u00E3o de Eventos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 490, 367);
@@ -54,7 +56,7 @@ public class TelaInicial extends JFrame {
 		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.DEFAULT_COLSPEC,
+				ColumnSpec.decode("20dlu"),
 				ColumnSpec.decode("default:grow"),
 				ColumnSpec.decode("20dlu"),
 				ColumnSpec.decode("50dlu:grow"),

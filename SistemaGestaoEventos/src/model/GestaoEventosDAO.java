@@ -16,13 +16,14 @@ public class GestaoEventosDAO {
 	public void CadastrarPessoa(PessoaModel pessoaModel) {
 		try {
 			String sql1 = "insert into gestaoeventos.pessoas (nomePessoa, sobrenomePessoa, idSalaPrimeiraEtapa, "
-					+ "idSalaSegundaEtapa, idEspacoCafe) values (?, ?, ?, ?, ?)";
+					+ "idSalaSegundaEtapa, idEspacoPrimeiraEtapa, idEspacoSegundaEtapa) values (?, ?, ?, ?, ?, ?)";
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql1);
 			pstmt.setString(1, pessoaModel.getNomePessoa());
 			pstmt.setString(2, pessoaModel.getSobrenomePessoa());
 			pstmt.setInt(3, pessoaModel.getIdSalaPrimeiraEtapa());
 			pstmt.setInt(4, pessoaModel.getIdSalaSegundaEtapa());
-			pstmt.setInt(5, pessoaModel.getIdEspacoCafe());
+			pstmt.setInt(5, pessoaModel.getIdEspacoPrimeiraEtapa());
+			pstmt.setInt(6, pessoaModel.getIdEspacoSegundaEtapa());
 			pstmt.execute();
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
@@ -63,14 +64,15 @@ public class GestaoEventosDAO {
 		dados.addColumn("Sobrenome");
 		dados.addColumn("ID Sala 1ª Etapa");
 		dados.addColumn("ID Sala 2ª Etapa");
-		dados.addColumn("ID Espaço Café");
+		dados.addColumn("ID Espaço Café 1ª Etapa");
+		dados.addColumn("ID Espaço Café 2ª Etapa");
 		try {
 			String sql4 = "select * from gestaoeventos.pessoas";
 			Statement stmt = conexao.conectar().createStatement();
 			ResultSet rs = stmt.executeQuery(sql4);
 			while(rs.next()) {
 				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), 
-						rs.getInt(5), rs.getInt(6)});
+						rs.getInt(5), rs.getInt(6), rs.getInt(7)});
 			}
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
@@ -133,12 +135,11 @@ public class GestaoEventosDAO {
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
 		dados.addColumn("Sobrenome");
-		dados.addColumn("ID Espaço");
-		dados.addColumn("Nome Espaço");
+		dados.addColumn("ID Espaço 1ª Etapa");
+		dados.addColumn("ID Espaço 2ª Etapa");
 		try {
-			String sql7 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, E.idEspacoCafe, E.nomeEspacoCafe "
-					+ "from gestaoeventos.pessoas as P "
-					+ "inner join gestaoeventos.espacocafe as E on P.idEspacoCafe = E.idEspacoCafe";
+			String sql7 = "select idPessoa, nomePessoa, sobrenomePessoa, idEspacoPrimeiraEtapa, idEspacoSegundaEtapa "
+					+ "from gestaoeventos.pessoas";
 			Statement stmt = conexao.conectar().createStatement();
 			ResultSet rs = stmt.executeQuery(sql7);
 			while(rs.next()) {
@@ -151,18 +152,18 @@ public class GestaoEventosDAO {
 		return dados;
 	}
 	
-	// Select buscar pela ID do espaço e apresentar seus dados na tabela - Tela Consultar Espaços
-	public DefaultTableModel ConsultarEspacoID(int idPesquisa) {
+	// Select buscar pela ID do espaço da PRIMEIRA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
+	public DefaultTableModel ConsultarEspacoPrimeiraID(int idPesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
 		dados.addColumn("Sobrenome");
-		dados.addColumn("ID Espaço");
-		dados.addColumn("Nome Espaço");
+		dados.addColumn("ID Espaço Café");
+		dados.addColumn("Nome Espaço Café");
 		try {
 			String sql8 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, E.idEspacoCafe, E.nomeEspacoCafe "
 					+ "from gestaoeventos.pessoas as P "
-					+ "inner join gestaoeventos.espacocafe as E on P.idEspacoCafe = E.idEspacoCafe "
+					+ "inner join gestaoeventos.espacocafe as E on P.idEspacoPrimeiraEtapa = E.idEspacoCafe "
 					+ "where E.idEspacoCafe = " + idPesquisa;
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql8);
 			ResultSet rs = pstmt.executeQuery(sql8);
@@ -174,9 +175,33 @@ public class GestaoEventosDAO {
 		}
 		return dados;
 	}
+
+	// Select buscar pela ID do espaço da SEGUNDA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
+	public DefaultTableModel ConsultarEspacoSegundaID(int idPesquisa) {
+		DefaultTableModel dados = new DefaultTableModel();
+		dados.addColumn("ID Pessoa");
+		dados.addColumn("Nome");
+		dados.addColumn("Sobrenome");
+		dados.addColumn("ID Espaço Café");
+		dados.addColumn("Nome Espaço Café");
+		try {
+			String sql9 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, E.idEspacoCafe, E.nomeEspacoCafe "
+					+ "from gestaoeventos.pessoas as P "
+					+ "inner join gestaoeventos.espacocafe as E on P.idEspacoSegundaEtapa = E.idEspacoCafe "
+					+ "where E.idEspacoCafe = " + idPesquisa;
+			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql9);
+			ResultSet rs = pstmt.executeQuery(sql9);
+			while (rs.next()) {
+				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)});
+			}
+		} catch (Exception erro) {
+			System.out.println(erro.getMessage());
+		}
+		return dados;
+	}
 	
-	// Select buscar pela nome do espaço e apresentar seus dados na tabela - Tela Consultar Espaços
-	public DefaultTableModel ConsultarEspacoNome(String nomePesquisa) {
+	// Select buscar pela nome do espaço da PRIMEIRA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
+	public DefaultTableModel ConsultarEspacoPrimeiraNome(String nomePesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -184,12 +209,39 @@ public class GestaoEventosDAO {
 		dados.addColumn("ID Espaço");
 		dados.addColumn("Nome Espaço");
 		try {
-			String sql9 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, E.idEspacoCafe, E.nomeEspacoCafe "
+			String sql10 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, E.idEspacoCafe, E.nomeEspacoCafe "
 					+ "from gestaoeventos.pessoas as P "
-					+ "inner join gestaoeventos.espacocafe as E on P.idEspacoCafe = E.idEspacoCafe "
+					+ "inner join gestaoeventos.espacocafe as E on P.idEspacoPrimeiraEtapa = E.idEspacoCafe "
 					+ "where E.nomeEspacoCafe = '" + nomePesquisa + "'";
-			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql9);
-			ResultSet rs = pstmt.executeQuery(sql9);
+			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql10);
+			ResultSet rs = pstmt.executeQuery(sql10);
+			while (rs.next()) {
+				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)});
+			}
+			rs.close();
+			pstmt.close();
+		} catch (Exception erro) {
+			System.out.println(erro.getMessage());
+		}
+
+		return dados;
+	}
+	
+	// Select buscar pela nome do espaço da SEGUNDA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
+	public DefaultTableModel ConsultarEspacoSegundaNome(String nomePesquisa) {
+		DefaultTableModel dados = new DefaultTableModel();
+		dados.addColumn("ID Pessoa");
+		dados.addColumn("Nome");
+		dados.addColumn("Sobrenome");
+		dados.addColumn("ID Espaço");
+		dados.addColumn("Nome Espaço");
+		try {
+			String sql11 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, E.idEspacoCafe, E.nomeEspacoCafe "
+					+ "from gestaoeventos.pessoas as P "
+					+ "inner join gestaoeventos.espacocafe as E on P.idEspacoSegundaEtapa = E.idEspacoCafe "
+					+ "where E.nomeEspacoCafe = '" + nomePesquisa + "'";
+			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql11);
+			ResultSet rs = pstmt.executeQuery(sql11);
 			while (rs.next()) {
 				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)});
 			}
@@ -211,9 +263,9 @@ public class GestaoEventosDAO {
 		dados.addColumn("ID Sala 1ª Etapa");
 		dados.addColumn("ID Sala 1ª Etapa");
 		try {
-			String sql10 = "select idPessoa, nomePessoa, sobrenomePessoa, idSalaPrimeiraEtapa,  idSalaSegundaEtapa from gestaoeventos.pessoas";
+			String sql12 = "select idPessoa, nomePessoa, sobrenomePessoa, idSalaPrimeiraEtapa, idSalaSegundaEtapa from gestaoeventos.pessoas";
 			Statement stmt = conexao.conectar().createStatement();
-			ResultSet rs = stmt.executeQuery(sql10);
+			ResultSet rs = stmt.executeQuery(sql12);
 			while(rs.next()) {
 				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)});
 			}
@@ -233,12 +285,12 @@ public class GestaoEventosDAO {
 		dados.addColumn("Nome Sala");
 		dados.addColumn("Lotação");
 		try {
-			String sq11 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaPrimeiraEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
+			String sq13 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaPrimeiraEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
 					+ "from gestaoeventos.pessoas as P "
 					+ "inner join gestaoeventos.salaevento as S on P.idSalaPrimeiraEtapa = S.idSalaEvento "
 					+  "where S.idSalaEvento = " + idPesquisa;
-			PreparedStatement pstmt = conexao.conectar().prepareStatement(sq11);
-			ResultSet rs = pstmt.executeQuery(sq11);
+			PreparedStatement pstmt = conexao.conectar().prepareStatement(sq13);
+			ResultSet rs = pstmt.executeQuery(sq13);
 			while (rs.next()) {
 				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6)});
 			}
@@ -258,12 +310,12 @@ public class GestaoEventosDAO {
 		dados.addColumn("Nome Sala");
 		dados.addColumn("Lotação");
 		try {
-			String sq12 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaSegundaEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
+			String sq14 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaSegundaEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
 					+ "from gestaoeventos.pessoas as P "
 					+ "inner join gestaoeventos.salaevento as S on P.idSalaSegundaEtapa = S.idSalaEvento "
 					+ "where S.idSalaEvento = " + idPesquisa;
-			PreparedStatement pstmt = conexao.conectar().prepareStatement(sq12);
-			ResultSet rs = pstmt.executeQuery(sq12);
+			PreparedStatement pstmt = conexao.conectar().prepareStatement(sq14);
+			ResultSet rs = pstmt.executeQuery(sq14);
 			while (rs.next()) {
 				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6)});
 			}
@@ -284,12 +336,12 @@ public class GestaoEventosDAO {
 		dados.addColumn("Nome Sala");
 		dados.addColumn("Lotação");
 		try {
-			String sql13 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaPrimeiraEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
+			String sql15 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaPrimeiraEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
 					+ "from gestaoeventos.pessoas as P "
 					+ "inner join gestaoeventos.salaevento as S on P.idSalaPrimeiraEtapa = S.idSalaEvento "
 					+ "where S.nomeSalaEvento = '" + nomePesquisa + "'";
-			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql13);
-			ResultSet rs = pstmt.executeQuery(sql13);
+			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql15);
+			ResultSet rs = pstmt.executeQuery(sql15);
 			while (rs.next()) {
 				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6)});
 			}
@@ -312,12 +364,12 @@ public class GestaoEventosDAO {
 		dados.addColumn("Nome Sala");
 		dados.addColumn("Lotação");
 		try {
-			String sql14 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaSegundairaEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
+			String sql16 = "select P.idPessoa, P.nomePessoa, P.sobrenomePessoa, P.idSalaSegundairaEtapa, S.nomeSalaEvento, S.lotacaoSalaEvento "
 					+ "from gestaoeventos.pessoas as P "
 					+ "inner join gestaoeventos.salaevento as S on P.idSalaSegundairaEtapa = S.idSalaEvento "
 					+ "where S.nomeSalaEvento = '" + nomePesquisa + "'";
-			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql14);
-			ResultSet rs = pstmt.executeQuery(sql14);
+			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql16);
+			ResultSet rs = pstmt.executeQuery(sql16);
 			while (rs.next()) {
 				dados.addRow(new Object[] {rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getInt(6)});
 			}

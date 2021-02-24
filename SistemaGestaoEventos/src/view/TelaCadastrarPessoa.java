@@ -21,6 +21,7 @@ import java.text.ParseException;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class TelaCadastrarPessoa extends JFrame {
 
@@ -30,7 +31,8 @@ public class TelaCadastrarPessoa extends JFrame {
 	private JTextField tfCampoSobrenome;
 	private JTextField tfCampoPrimeiraSala;
 	private JTextField tfCampoSegundaSala;
-	private JTextField tfEspaco;
+	private JTextField tfEspacoPrimeiraEtapa;
+	private JTextField tfEspacoSegundaEtapa;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -46,8 +48,9 @@ public class TelaCadastrarPessoa extends JFrame {
 	}
 
 	public TelaCadastrarPessoa() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaCadastrarPessoa.class.getResource("/img/imgTelaInicial3.png")));
 		setTitle("Cadastrar Pessoa");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 345);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,49 +104,61 @@ public class TelaCadastrarPessoa extends JFrame {
 		tfCampoSobrenome.setColumns(10);
 		baseTelaCadastrarPessoa.add(tfCampoSobrenome, "3, 6, fill, default");
 		
-		JLabel lblIdSalaPrimeiraEtapa = new JLabel("Sala Primeira Etapa:    ");
-		lblIdSalaPrimeiraEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
-		baseTelaCadastrarPessoa.add(lblIdSalaPrimeiraEtapa, "2, 8, right, default");
+		JLabel lblSalaPrimeiraEtapa = new JLabel("Sala Evento 1\u00AA Etapa:   ");
+		lblSalaPrimeiraEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSalaPrimeiraEtapa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		baseTelaCadastrarPessoa.add(lblSalaPrimeiraEtapa, "2, 8, right, default");
 		
 		tfCampoPrimeiraSala = new JTextField();
 		tfCampoPrimeiraSala.setColumns(10);
 		baseTelaCadastrarPessoa.add(tfCampoPrimeiraSala, "3, 8, fill, default");
 		
-		JLabel lblIdSalaSegundaEtapa = new JLabel("Sala Segunda Etapa:    ");
-		lblIdSalaSegundaEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
-		baseTelaCadastrarPessoa.add(lblIdSalaSegundaEtapa, "2, 10, right, default");
-		
+		JLabel lblSalaSegundaEtapa = new JLabel("Sala Evento 2\u00AA Etapa:   ");
+		lblSalaSegundaEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSalaSegundaEtapa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		baseTelaCadastrarPessoa.add(lblSalaSegundaEtapa, "2, 10, right, default");
+
 		tfCampoSegundaSala = new JTextField();
 		tfCampoSegundaSala.setColumns(10);
 		baseTelaCadastrarPessoa.add(tfCampoSegundaSala, "3, 10, fill, default");
-		
-		JLabel lblIdEspacoCafe = new JLabel("Espa\u00E7o de Caf\u00E9:    ");
-		lblIdEspacoCafe.setHorizontalAlignment(SwingConstants.RIGHT);
-		baseTelaCadastrarPessoa.add(lblIdEspacoCafe, "2, 12, right, default");
-		
-		tfEspaco = new JTextField();
-		tfEspaco.setColumns(10);
-		baseTelaCadastrarPessoa.add(tfEspaco, "3, 12, fill, default");
-		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				// ver forma de voltar para a tela principal sem fechar tudo
-				TelaInicial frameInicial = new TelaInicial();
-				frameInicial.setVisible(true);
-			}
-		});
-		baseTelaCadastrarPessoa.add(btnVoltar, "3, 16");
+
+		JLabel lblEspacoPrimeiraEtapa = new JLabel("Espa\u00E7o Caf\u00E9 1\u00AA Etapa:   ");
+		lblEspacoPrimeiraEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEspacoPrimeiraEtapa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		baseTelaCadastrarPessoa.add(lblEspacoPrimeiraEtapa, "2, 12, right, default");
+
+		tfEspacoPrimeiraEtapa = new JTextField();
+		tfEspacoPrimeiraEtapa.setColumns(10);
+		baseTelaCadastrarPessoa.add(tfEspacoPrimeiraEtapa, "3, 12, fill, default");
 
 		JButton btnCadastrarPessoa = new JButton("Cadastrar");
 		btnCadastrarPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
-					controller.CadastrarPessoa(tfCampoNome.getText(), tfCampoSobrenome.getText(),
-							tfCampoPrimeiraSala.getText(), tfCampoSegundaSala.getText(), tfEspaco.getText());
-					JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso.");
+					if ((tfCampoNome.getText() == null || tfCampoNome.getText().trim().isEmpty())
+							|| (tfCampoSobrenome.getText() == null || tfCampoSobrenome.getText().trim().isEmpty())
+							|| (tfCampoPrimeiraSala.getText() == null || tfCampoPrimeiraSala.getText().trim().isEmpty())
+							|| (tfCampoSegundaSala.getText() == null || tfCampoSegundaSala.getText().trim().isEmpty())
+							|| (tfEspacoPrimeiraEtapa.getText() == null
+									|| tfEspacoPrimeiraEtapa.getText().trim().isEmpty())
+							|| (tfEspacoPrimeiraEtapa.getText() == null
+									|| tfEspacoPrimeiraEtapa.getText().trim().isEmpty())
+							|| (tfEspacoSegundaEtapa.getText() == null
+									|| tfEspacoSegundaEtapa.getText().trim().isEmpty())) {
+						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+					} else {
+						controller.CadastrarPessoa(tfCampoNome.getText(), tfCampoSobrenome.getText(),
+								tfCampoPrimeiraSala.getText(), tfCampoSegundaSala.getText(),
+								tfEspacoPrimeiraEtapa.getText(), tfEspacoSegundaEtapa.getText());
+						JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso.");
+						tfCampoNome.setText("");
+						tfCampoSobrenome.setText("");
+						tfCampoPrimeiraSala.setText("");
+						tfCampoSegundaSala.setText("");
+						tfEspacoPrimeiraEtapa.setText("");
+						tfEspacoSegundaEtapa.setText("");
+					}
 				} catch (SQLException erro) {
 					JOptionPane.showMessageDialog(null, "Falha ao cadastrar pessoa.");
 					System.out.println(erro.getMessage());
@@ -153,9 +168,17 @@ public class TelaCadastrarPessoa extends JFrame {
 
 			}
 		});
-		baseTelaCadastrarPessoa.add(btnCadastrarPessoa, "3, 14");
-		
+
+		JLabel lblEspacoSegundaEtapa = new JLabel("Espa\u00E7o Caf\u00E9 2\u00AA Etapa:   ");
+		lblEspacoSegundaEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEspacoSegundaEtapa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		baseTelaCadastrarPessoa.add(lblEspacoSegundaEtapa, "2, 14, right, default");
+
+		tfEspacoSegundaEtapa = new JTextField();
+		tfEspacoSegundaEtapa.setColumns(10);
+		baseTelaCadastrarPessoa.add(tfEspacoSegundaEtapa, "3, 14, fill, default");
+		baseTelaCadastrarPessoa.add(btnCadastrarPessoa, "3, 16");
+
 	}
 
 }
-
