@@ -123,4 +123,8 @@ public class GestaoEventosController {
 		return new GestaoEventosDAO().ConsultarSalaSegundaNome(nomePessoa);
 	}
 	
+	// Método para criação das tabelas no banco
+	public void CriarTabelas() throws SQLException, ParseException {
+		new GestaoEventosDAO().CriarTabelas();
+	}
 }

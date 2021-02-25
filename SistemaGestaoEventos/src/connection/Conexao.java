@@ -9,6 +9,8 @@ public class Conexao {
 
 		Conexao c = new Conexao();
 		c.conectar();
+		
+		
 	}
 
 	public Connection conectar() {
@@ -21,10 +23,9 @@ public class Conexao {
 			String url = "jdbc:mysql://localhost:3306/gestaoeventos?createDatabaseIfNotExist=true";
 			String usuario = "root";
 			String senha = "123456";
-
 			retornoConexao = DriverManager.getConnection(url, usuario, senha);
 			System.out.println("Conectado com sucesso!");
-
+		
 		} catch (Exception erro) {
 			System.out.println("Falha ao conectar:");
 			System.out.println(erro.getMessage());
