@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConexaoBanco>
+	<url>jdbc:mysql://localhost:3306/gestaoeventos?createDatabaseIfNotExist=true</url>
+	<usuario>root</usuario>
+	<senha>123456</senha>
+</ConexaoBanco>

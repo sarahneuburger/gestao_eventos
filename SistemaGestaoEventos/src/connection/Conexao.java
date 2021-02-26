@@ -4,13 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Conexao {
-
+	
 	public static void main(String[] args) {
 
 		Conexao c = new Conexao();
-		c.conectar();
-		
-		
+		c.conectar();		
 	}
 
 	public Connection conectar() {
@@ -19,10 +17,12 @@ public class Conexao {
 		Connection retornoConexao = null;
 
 		try {
-
+			
+			// Dados do banco para conexão
 			String url = "jdbc:mysql://localhost:3306/gestaoeventos?createDatabaseIfNotExist=true";
 			String usuario = "root";
 			String senha = "123456";
+			
 			retornoConexao = DriverManager.getConnection(url, usuario, senha);
 			System.out.println("Conectado com sucesso!");
 		
@@ -31,11 +31,9 @@ public class Conexao {
 			System.out.println(erro.getMessage());
 
 			erro.printStackTrace();
-
 		}
 
 		return retornoConexao;
-
 	}
 
 }

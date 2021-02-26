@@ -190,7 +190,8 @@ public class TelaInicial extends JFrame {
 					controller.CriarTabelas();
 					JOptionPane.showMessageDialog(null, "Tabelas cadastradas com sucesso! Siga com a utilização do sistema. :)");
 				} catch (Exception erro) {
-					JOptionPane.showMessageDialog(null, "Falha ao cadastrar as tabelas.");
+					JOptionPane.showMessageDialog(null, "Falha ao cadastrar as tabelas. Contate a sua TI para verificar os dados de conexão com o banco "
+							+ "(SistemaGestaoEventos\\src\\connection\\Conexao.java");
 					System.out.println(erro.getMessage());
 				}
 			}
