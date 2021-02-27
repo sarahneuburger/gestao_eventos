@@ -7,9 +7,10 @@ Este sistema visa facilitar o dia a dia de instituições na gestão dos seus ev
 É possível cadastrar pessoas, salas de eventos e espaços de café. As pessoas são vinculadas nas salas e espaços planejados e as consultas podem ser realizadas conforme filtro desejado, por pessoa, por sala de evento ou por espaço de café. 
 
 ## Requisitos básicos:
-- JDK;
-- Banco de dados MySQL para persistência das informações;
-- Eclise como ferramenta de desenvolvimento.
+- JDK 8;
+- Banco de dados MySQL para persistência das informações (utilizado Workbench 8.0);
+- IDE para desenvolvimento (utilizado Eclipse 12-2020);
+- JUnit 4.
 
 ## Compilação e execução:
 
