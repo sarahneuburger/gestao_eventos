@@ -140,20 +140,20 @@ public class TelaConsultarEspacos extends JFrame {
 				try {
 					if (Integer.parseInt(tfEspacoEtapa.getText()) == 1) {
 						if (tfIdEspaco.getText().length() > 0 && tfNomeEspacoPesquisar.getText().length() == 0) {
-							tabelaEspacos.setModel(controller.ConsultarEspacoPrimeiraID(tfIdEspaco.getText()));
+							tabelaEspacos.setModel(controller.consultarEspacoPrimeiraID(tfIdEspaco.getText()));
 							tabela.setViewportView(tabelaEspacos);
 						} else if (tfNomeEspacoPesquisar.getText().length() > 1 && tfIdEspaco.getText().length() == 0) {
-							tabelaEspacos.setModel(controller.ConsultarEspacoPrimeiraNome(tfNomeEspacoPesquisar.getText()));
+							tabelaEspacos.setModel(controller.consultarEspacoPrimeiraNome(tfNomeEspacoPesquisar.getText()));
 							tabela.setViewportView(tabelaEspacos);
 						} else {
 							JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
 						}
 					} else if (Integer.parseInt(tfEspacoEtapa.getText()) == 2) {
 						if (tfIdEspaco.getText().length() > 0 && tfNomeEspacoPesquisar.getText().length() == 0) {
-							tabelaEspacos.setModel(controller.ConsultarEspacoSegundaID(tfIdEspaco.getText()));
+							tabelaEspacos.setModel(controller.consultarEspacoSegundaID(tfIdEspaco.getText()));
 							tabela.setViewportView(tabelaEspacos);
 						} else if (tfNomeEspacoPesquisar.getText().length() > 1 && tfIdEspaco.getText().length() == 0) {
-							tabelaEspacos.setModel(controller.ConsultarEspacoSegundaNome(tfNomeEspacoPesquisar.getText()));
+							tabelaEspacos.setModel(controller.consultarEspacoSegundaNome(tfNomeEspacoPesquisar.getText()));
 							tabela.setViewportView(tabelaEspacos);
 						} else {
 							JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
@@ -170,7 +170,7 @@ public class TelaConsultarEspacos extends JFrame {
 		baseBotaoPesquisarEspaco.add(btnPesquisarEspaco, "4, 1");
 
 		tabelaEspacos = new JTable();
-		tabelaEspacos.setModel(controller.VisualizarEspacos());
+		tabelaEspacos.setModel(controller.visualizarEspacos());
 		tabela.setViewportView(tabelaEspacos);
 	}
 

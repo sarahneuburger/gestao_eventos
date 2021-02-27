@@ -38,10 +38,15 @@ public class SalaEventoModel {
 		this.lotacaoSalaEvento = lotacaoSalaEvento;
 	}
 	
+	public SalaEventoModel(String nomeSalaEvento, int lotacaoSalaEvento) {
+		this.nomeSalaEvento = nomeSalaEvento;
+		this.lotacaoSalaEvento = lotacaoSalaEvento;
+	}
+	
 	public SalaEventoModel() {
 		
 	}
-	
+
 	
 }
 

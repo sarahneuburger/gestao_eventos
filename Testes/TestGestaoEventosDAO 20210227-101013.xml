@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestGestaoEventosDAO" project="SistemaGestaoEventos" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.TestGestaoEventosDAO" time="31.209">
+    <testcase name="testCadastrarPessoa" classname="tests.TestGestaoEventosDAO" time="29.738"/>
+    <testcase name="testCadastrarSalaEvento" classname="tests.TestGestaoEventosDAO" time="1.471"/>
+  </testsuite>
+</testrun>

@@ -148,7 +148,7 @@ public class TelaCadastrarPessoa extends JFrame {
 									|| tfEspacoSegundaEtapa.getText().trim().isEmpty())) {
 						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 					} else {
-						controller.CadastrarPessoa(tfCampoNome.getText(), tfCampoSobrenome.getText(),
+						controller.cadastrarPessoa(tfCampoNome.getText(), tfCampoSobrenome.getText(),
 								tfCampoPrimeiraSala.getText(), tfCampoSegundaSala.getText(),
 								tfEspacoPrimeiraEtapa.getText(), tfEspacoSegundaEtapa.getText());
 						JOptionPane.showMessageDialog(null, "Pessoa cadastrada com sucesso.");

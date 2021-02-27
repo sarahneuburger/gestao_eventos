@@ -80,6 +80,17 @@ public class PessoaModel {
 		this.idEspacoPrimeiraEtapa = idEspacoPrimeiraEtapa;
 		this.idEspacoSegundaEtapa = idEspacoSegundaEtapa;
 	}
+	
+	public PessoaModel(String nomePessoa, String sobrenomePessoa, int idSalaPrimeiraEtapa,
+			int idSalaSegundaEtapa, int idEspacoPrimeiraEtapa, int idEspacoSegundaEtapa) {
+		this.nomePessoa = nomePessoa;
+		this.sobrenomePessoa = sobrenomePessoa;
+		this.idSalaPrimeiraEtapa = idSalaPrimeiraEtapa;
+		this.idSalaSegundaEtapa = idSalaSegundaEtapa;
+		this.idEspacoPrimeiraEtapa = idEspacoPrimeiraEtapa;
+		this.idEspacoSegundaEtapa = idEspacoSegundaEtapa;
+	}
+	
 
 	public PessoaModel() {
 

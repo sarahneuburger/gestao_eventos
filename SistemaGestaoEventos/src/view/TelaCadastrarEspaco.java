@@ -92,7 +92,7 @@ public class TelaCadastrarEspaco extends JFrame {
 					if (tfNomeEspaco.getText() == null || tfNomeEspaco.getText().trim().isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 					} else {
-					controller.CadastrarEspacoCafe(tfNomeEspaco.getText());
+					controller.cadastrarEspacoCafe(tfNomeEspaco.getText());
 					JOptionPane.showMessageDialog(null, "Espaço de café cadastrada com sucesso.");
 					tfNomeEspaco.setText("");
 					}

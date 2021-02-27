@@ -27,6 +27,9 @@ public class EspacoCafeModel {
 		this.nomeEspacoCafe = nomeEspacoCafe;
 	}
 	
+	public EspacoCafeModel(String nomeEspacoCafe) {
+		this.nomeEspacoCafe = nomeEspacoCafe;
+	}
 	public EspacoCafeModel() {
 		
 	}

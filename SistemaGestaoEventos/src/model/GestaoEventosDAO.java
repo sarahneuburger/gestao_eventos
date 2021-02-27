@@ -13,7 +13,7 @@ public class GestaoEventosDAO {
 	private Conexao conexao = new Conexao();
 
 	// Insert para cadastrar pessoa  Tela Cadastrar Pessoa
-	public void CadastrarPessoa(PessoaModel pessoaModel) {
+	public boolean cadastrarPessoa(PessoaModel pessoaModel) {
 		try {
 			String sql1 = "INSERT INTO gestaoeventos.pessoas (nomePessoa, sobrenomePessoa, idSalaPrimeiraEtapa, "
 					+ "idSalaSegundaEtapa, idEspacoPrimeiraEtapa, idEspacoSegundaEtapa) VALUES (?, ?, ?, ?, ?, ?)";
@@ -25,39 +25,45 @@ public class GestaoEventosDAO {
 			pstmt.setInt(5, pessoaModel.getIdEspacoPrimeiraEtapa());
 			pstmt.setInt(6, pessoaModel.getIdEspacoSegundaEtapa());
 			pstmt.execute();
+			return true;
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
+			return false;
 		}
 	}
 
 	// Insert para cadastrar sala de evento - Tela Cadastrar Sala Evento
-	public void CadastrarSalaEvento(SalaEventoModel salaEventoModel) {
+	public boolean cadastrarSalaEvento(SalaEventoModel salaEventoModel) {
 		try {
 			String sql2 = "INSERT INTO gestaoeventos.salaevento (nomeSalaEvento, lotacaoSalaEvento) VALUES (?, ?)";
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql2);
 			pstmt.setString(1, salaEventoModel.getNomeSalaEvento());
 			pstmt.setInt(2, salaEventoModel.getLotacaoSalaEvento());
 			pstmt.execute();
+			return true;
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
+			return false;
 		}
 	}
 	
 	
 	// Insert para cadastrar espaço de café - Tela Cadastrar Espaço Café
-	public void CadastrarEspacoCafe(EspacoCafeModel espacoCafeModel) {
+	public boolean cadastrarEspacoCafe(EspacoCafeModel espacoCafeModel) {
 		try {
 			String sql3 = "INSERT INTO gestaoeventos.espacocafe (nomeEspacoCafe) VALUES (?)";
 			PreparedStatement pstmt = conexao.conectar().prepareStatement(sql3);
 			pstmt.setString(1, espacoCafeModel.getNomeEspacoCafe());
 			pstmt.execute();
+			return true;
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
+			return false;
 		}
 	}
 	
 	// Select para apresentar todas as pessoas cadastradas na tabela - Tela Consultar Pessoas
-	public DefaultTableModel VisualizarPessoas() {
+	public DefaultTableModel visualizarPessoas() {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("Código");
 		dados.addColumn("Nome");
@@ -81,7 +87,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pela ID da pessoa e apresentar seus dados na tabela - Tela Consultar Pessoas
-	public DefaultTableModel ConsultarPessoasID(int idPesquisa) {
+	public DefaultTableModel consultarPessoasID(int idPesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("Código");
 		dados.addColumn("Nome");
@@ -104,7 +110,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pelo nome da pessoa e apresentar seus dados na tabela - Tela Consultar Pessoas
-	public DefaultTableModel ConsultarPessoasNome(String nomePesquisa) {
+	public DefaultTableModel consultarPessoasNome(String nomePesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("Código");
 		dados.addColumn("Nome");
@@ -130,7 +136,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select para apresentar os espaços cadastrados e as pessoas a eles vinculados - Tela Consultar Espaço Café
-	public DefaultTableModel VisualizarEspacos() {
+	public DefaultTableModel visualizarEspacos() {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -153,7 +159,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pela ID do espaço da PRIMEIRA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
-	public DefaultTableModel ConsultarEspacoPrimeiraID(int idPesquisa) {
+	public DefaultTableModel consultarEspacoPrimeiraID(int idPesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -177,7 +183,7 @@ public class GestaoEventosDAO {
 	}
 
 	// Select buscar pela ID do espaço da SEGUNDA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
-	public DefaultTableModel ConsultarEspacoSegundaID(int idPesquisa) {
+	public DefaultTableModel consultarEspacoSegundaID(int idPesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -201,7 +207,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pela nome do espaço da PRIMEIRA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
-	public DefaultTableModel ConsultarEspacoPrimeiraNome(String nomePesquisa) {
+	public DefaultTableModel consultarEspacoPrimeiraNome(String nomePesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -228,7 +234,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pela nome do espaço da SEGUNDA ETAPA e apresentar seus dados na tabela - Tela Consultar Espaços
-	public DefaultTableModel ConsultarEspacoSegundaNome(String nomePesquisa) {
+	public DefaultTableModel consultarEspacoSegundaNome(String nomePesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -255,7 +261,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select para apresentar as salas cadastradas e as pessoas a elas vinculadas - Tela Consultar Salas de Eventos
-	public DefaultTableModel VisualizarSalas() {
+	public DefaultTableModel visualizarSalas() {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -276,7 +282,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pela ID da sala primeira etapa e apresentar seus dados na tabela - Tela Consultar Salas
-	public DefaultTableModel ConsultarSalaPrimeiraID(int idPesquisa) {
+	public DefaultTableModel consultarSalaPrimeiraID(int idPesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -301,7 +307,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pela ID da sala segunda etapa e apresentar seus dados na tabela - Tela Consultar Salas
-	public DefaultTableModel ConsultarSalaSegundaID(int idPesquisa) {
+	public DefaultTableModel consultarSalaSegundaID(int idPesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -327,7 +333,7 @@ public class GestaoEventosDAO {
 	
 	
 	// Select buscar pela nome da sala e apresentar seus dados na tabela - Tela Consultar Salas
-	public DefaultTableModel ConsultarSalaPrimeiraNome(String nomePesquisa) {
+	public DefaultTableModel consultarSalaPrimeiraNome(String nomePesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -355,7 +361,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Select buscar pela nome da sala e apresentar seus dados na tabela - Tela Consultar Salas
-	public DefaultTableModel ConsultarSalaSegundaNome(String nomePesquisa) {
+	public DefaultTableModel consultarSalaSegundaNome(String nomePesquisa) {
 		DefaultTableModel dados = new DefaultTableModel();
 		dados.addColumn("ID Pessoa");
 		dados.addColumn("Nome");
@@ -383,7 +389,7 @@ public class GestaoEventosDAO {
 	}
 	
 	// Criação das tabelas no banco de dados
-	public void CriarTabelas() {
+	public boolean criarTabelas() {
 		try {
 			//String createSchema = "CREATE SCHEMA IF NOT EXISTS gestaoeventos";
 			//String useSchema = "USE DATABASE gestaoeventos";
@@ -408,8 +414,10 @@ public class GestaoEventosDAO {
 			pstmt.executeBatch();
 			pstmt.clearBatch();
 			pstmt.close();
+			return true;
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
+			return false;
 		}
 	}
 	

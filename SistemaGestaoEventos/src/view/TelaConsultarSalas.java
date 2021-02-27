@@ -157,20 +157,20 @@ public class TelaConsultarSalas extends JFrame {
 				try {	
 					if (Integer.parseInt(tfEtapaSala.getText()) == 1) {
 						if (tfIdSala.getText().length() > 0 && tfNomeSalaPesquisar.getText().length() == 0) {
-							tabelaSalas.setModel(controller.ConsultarSalaPrimeiraID(tfIdSala.getText()));
+							tabelaSalas.setModel(controller.consultarSalaPrimeiraID(tfIdSala.getText()));
 							tabela.setViewportView(tabelaSalas);
 						} else if (tfNomeSalaPesquisar.getText().length() > 1 && tfIdSala.getText().length() == 0) {
-							tabelaSalas.setModel(controller.ConsultarSalaPrimeiraNome(tfNomeSalaPesquisar.getText()));
+							tabelaSalas.setModel(controller.consultarSalaPrimeiraNome(tfNomeSalaPesquisar.getText()));
 							tabela.setViewportView(tabelaSalas);
 						} else {
 							JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
 						}	
 					} else if(Integer.parseInt(tfEtapaSala.getText()) == 2) {
 						if (tfIdSala.getText().length() > 0 && tfNomeSalaPesquisar.getText().length() == 0) {
-							tabelaSalas.setModel(controller.ConsultarSalaSegundaID(tfIdSala.getText()));
+							tabelaSalas.setModel(controller.consultarSalaSegundaID(tfIdSala.getText()));
 							tabela.setViewportView(tabelaSalas);
 						} else if (tfNomeSalaPesquisar.getText().length() > 1 && tfIdSala.getText().length() == 0) {
-							tabelaSalas.setModel(controller.ConsultarSalaSegundaNome(tfNomeSalaPesquisar.getText()));
+							tabelaSalas.setModel(controller.consultarSalaSegundaNome(tfNomeSalaPesquisar.getText()));
 							tabela.setViewportView(tabelaSalas);
 						} else {
 							JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
@@ -188,7 +188,7 @@ public class TelaConsultarSalas extends JFrame {
 		
 		tabelaSalas = new JTable();
 		GestaoEventosController controller = new GestaoEventosController();
-		tabelaSalas.setModel(controller.VisualizarSalas());
+		tabelaSalas.setModel(controller.visualizarSalas());
 		tabela.setViewportView(tabelaSalas);
 	}
 

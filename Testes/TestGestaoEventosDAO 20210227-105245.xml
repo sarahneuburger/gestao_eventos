@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestGestaoEventosDAO" project="SistemaGestaoEventos" tests="11" started="11" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.TestGestaoEventosDAO" time="20.267">
+    <testcase name="testVisualizarPessoas" classname="tests.TestGestaoEventosDAO" time="13.756"/>
+    <testcase name="testConsultarEspacoPrimeiraID" classname="tests.TestGestaoEventosDAO" time="0.305"/>
+    <testcase name="testConsultarPessoasNome" classname="tests.TestGestaoEventosDAO" time="0.171"/>
+    <testcase name="testConsultarEspacoSegundaNome" classname="tests.TestGestaoEventosDAO" time="0.319"/>
+    <testcase name="testConsultarEspacoPrimeiraNome" classname="tests.TestGestaoEventosDAO" time="0.47"/>
+    <testcase name="testConsultarPessoasID" classname="tests.TestGestaoEventosDAO" time="0.144"/>
+    <testcase name="testConsultarEspacoSegundaID" classname="tests.TestGestaoEventosDAO" time="0.258"/>
+    <testcase name="testVisualizarEspacos" classname="tests.TestGestaoEventosDAO" time="0.179"/>
+    <testcase name="testCadastrarEspacoCafe" classname="tests.TestGestaoEventosDAO" time="0.592"/>
+    <testcase name="testCadastrarPessoa" classname="tests.TestGestaoEventosDAO" time="0.722"/>
+    <testcase name="testCadastrarSalaEvento" classname="tests.TestGestaoEventosDAO" time="3.351"/>
+  </testsuite>
+</testrun>

@@ -137,10 +137,10 @@ public class TelaConsultarPessoas extends JFrame {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
 					if(tfIdPessoa.getText().length() > 0 && tfNomePessoaPesquisar.getText().length() == 0) {
-						tabelaPessoas.setModel(controller.ConsultarPessoasID(tfIdPessoa.getText()));
+						tabelaPessoas.setModel(controller.consultarPessoasID(tfIdPessoa.getText()));
 						tabela.setViewportView(tabelaPessoas);
 					} else if (tfNomePessoaPesquisar.getText().length() > 1 && tfIdPessoa.getText().length() == 0) {
-						tabelaPessoas.setModel(controller.ConsultarPessoasNome(tfNomePessoaPesquisar.getText()));
+						tabelaPessoas.setModel(controller.consultarPessoasNome(tfNomePessoaPesquisar.getText()));
 						tabela.setViewportView(tabelaPessoas);
 					} else {
 						JOptionPane.showMessageDialog(null, "Informe um parâmetro válido.");
@@ -158,7 +158,7 @@ public class TelaConsultarPessoas extends JFrame {
 			
 		tabelaPessoas = new JTable();
 		GestaoEventosController controller = new GestaoEventosController();
-		tabelaPessoas.setModel(controller.VisualizarPessoas());
+		tabelaPessoas.setModel(controller.visualizarPessoas());
 		tabela.setViewportView(tabelaPessoas);
 	}
 

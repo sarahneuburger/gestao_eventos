@@ -187,7 +187,7 @@ public class TelaInicial extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
-					controller.CriarTabelas();
+					controller.criarTabelas();
 					JOptionPane.showMessageDialog(null, "Tabelas cadastradas com sucesso! Siga com a utilização do sistema. :)");
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "Falha ao cadastrar as tabelas. Contate a sua TI para verificar os dados de conexão com o banco "

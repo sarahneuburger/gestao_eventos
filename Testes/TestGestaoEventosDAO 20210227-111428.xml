@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestGestaoEventosDAO" project="SistemaGestaoEventos" tests="17" started="17" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.TestGestaoEventosDAO" time="24.302">
+    <testcase name="testVisualizarPessoas" classname="tests.TestGestaoEventosDAO" time="20.535"/>
+    <testcase name="testConsultarEspacoPrimeiraID" classname="tests.TestGestaoEventosDAO" time="0.281"/>
+    <testcase name="testConsultarSalaSegundaID" classname="tests.TestGestaoEventosDAO" time="0.173"/>
+    <testcase name="testConsultarSalaPrimeiraNome" classname="tests.TestGestaoEventosDAO" time="0.152"/>
+    <testcase name="testConsultarSalaPrimeiraID" classname="tests.TestGestaoEventosDAO" time="0.178"/>
+    <testcase name="testConsultarPessoasNome" classname="tests.TestGestaoEventosDAO" time="0.223"/>
+    <testcase name="testConsultarEspacoSegundaNome" classname="tests.TestGestaoEventosDAO" time="0.259"/>
+    <testcase name="testConsultarEspacoPrimeiraNome" classname="tests.TestGestaoEventosDAO" time="0.15"/>
+    <testcase name="testCriarTabelas" classname="tests.TestGestaoEventosDAO" time="0.363"/>
+    <testcase name="testConsultarSalaSegundaNome" classname="tests.TestGestaoEventosDAO" time="0.712"/>
+    <testcase name="testConsultarPessoasID" classname="tests.TestGestaoEventosDAO" time="0.285"/>
+    <testcase name="testVisualizarSalas" classname="tests.TestGestaoEventosDAO" time="0.158"/>
+    <testcase name="testConsultarEspacoSegundaID" classname="tests.TestGestaoEventosDAO" time="0.13"/>
+    <testcase name="testVisualizarEspacos" classname="tests.TestGestaoEventosDAO" time="0.102"/>
+    <testcase name="testCadastrarEspacoCafe" classname="tests.TestGestaoEventosDAO" time="0.233"/>
+    <testcase name="testCadastrarPessoa" classname="tests.TestGestaoEventosDAO" time="0.232"/>
+    <testcase name="testCadastrarSalaEvento" classname="tests.TestGestaoEventosDAO" time="0.136"/>
+  </testsuite>
+</testrun>

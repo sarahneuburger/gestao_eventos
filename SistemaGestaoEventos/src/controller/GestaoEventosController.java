@@ -16,7 +16,7 @@ public class GestaoEventosController {
 	// Métodos para interação entre interface e Banco de Dados
 	
 	// Método para cadastrar pessoa
-	public void CadastrarPessoa(String nomePessoa, String sobrenomePessoa, String idSalaPrimeiraEtapa, String idSalaSegundaEtapa, 
+	public boolean cadastrarPessoa(String nomePessoa, String sobrenomePessoa, String idSalaPrimeiraEtapa, String idSalaSegundaEtapa, 
 			String idEspacoPrimeiraEtapa, String idEspacoSegundaEtapa) throws SQLException, ParseException {
 		PessoaModel pessoa = new PessoaModel();
 		pessoa.setNomePessoa(nomePessoa);
@@ -25,106 +25,107 @@ public class GestaoEventosController {
 		pessoa.setIdSalaSegundaEtapa(Integer.parseInt(idSalaSegundaEtapa));
 		pessoa.setIdEspacoPrimeiraEtapa(Integer.parseInt(idEspacoPrimeiraEtapa));
 		pessoa.setIdEspacoSegundaEtapa(Integer.parseInt(idEspacoSegundaEtapa));
-		new GestaoEventosDAO().CadastrarPessoa(pessoa);	
+		new GestaoEventosDAO().cadastrarPessoa(pessoa);
+		return false;
 	}
 	
 	// Método para cadastrar sala de evento
-	public void CadastrarSalaEvento(String nomeSalaEvento, String lotacaoSalaEvento) throws SQLException, ParseException {
+	public void cadastrarSalaEvento(String nomeSalaEvento, String lotacaoSalaEvento) throws SQLException, ParseException {
 		SalaEventoModel salaEventoModel = new SalaEventoModel();
 		salaEventoModel.setNomeSalaEvento(nomeSalaEvento);
 		salaEventoModel.setLotacaoSalaEvento(Integer.parseInt(lotacaoSalaEvento));
-		new GestaoEventosDAO().CadastrarSalaEvento(salaEventoModel);	
+		new GestaoEventosDAO().cadastrarSalaEvento(salaEventoModel);	
 	}
 
 	// Método para cadastrar espaço de café
-	public void CadastrarEspacoCafe(String nomeEspacoCafe) throws SQLException, ParseException {
+	public void cadastrarEspacoCafe(String nomeEspacoCafe) throws SQLException, ParseException {
 		EspacoCafeModel espacoCafeModel = new EspacoCafeModel();
 		espacoCafeModel.setNomeEspacoCafe(nomeEspacoCafe);
-		new GestaoEventosDAO().CadastrarEspacoCafe(espacoCafeModel);	
+		new GestaoEventosDAO().cadastrarEspacoCafe(espacoCafeModel);	
 	}
 	
 	// Método para visualizar a tabela de pessoas
-	public TableModel VisualizarPessoas() throws SQLException, ParseException {
-		return new GestaoEventosDAO().VisualizarPessoas();
+	public TableModel visualizarPessoas() throws SQLException, ParseException {
+		return new GestaoEventosDAO().visualizarPessoas();
 		
 	}
 	
 	// Método para consultar pessoas conforme parâmetros de ID
-	public TableModel ConsultarPessoasID(String idPesquisa) throws SQLException, ParseException {
+	public TableModel consultarPessoasID(String idPesquisa) throws SQLException, ParseException {
 		int converteID = Integer.parseInt(idPesquisa);
-		return new GestaoEventosDAO().ConsultarPessoasID(converteID);
+		return new GestaoEventosDAO().consultarPessoasID(converteID);
 		
 	}
 	
 	// Método para consultar pessoas conforme parâmetros de nome
-	public TableModel ConsultarPessoasNome(String nomePessoa) throws SQLException, ParseException {
-		return new GestaoEventosDAO().ConsultarPessoasNome(nomePessoa);
+	public TableModel consultarPessoasNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().consultarPessoasNome(nomePessoa);
 		
 	}
 	
 	// Método para visualizar a tabela de espaços de café
-	public TableModel VisualizarEspacos() throws SQLException, ParseException {
-		return new GestaoEventosDAO().VisualizarEspacos();
+	public TableModel visualizarEspacos() throws SQLException, ParseException {
+		return new GestaoEventosDAO().visualizarEspacos();
 		
 	}
 	
 	// Método para consultar espaços da PRIMEIRA ETAPA conforme parâmetros de ID
-	public TableModel ConsultarEspacoPrimeiraID(String idPesquisa) throws SQLException, ParseException {
+	public TableModel consultarEspacoPrimeiraID(String idPesquisa) throws SQLException, ParseException {
 		int converteID = Integer.parseInt(idPesquisa);
-		return new GestaoEventosDAO().ConsultarEspacoPrimeiraID(converteID);
+		return new GestaoEventosDAO().consultarEspacoPrimeiraID(converteID);
 	}
 	
 	// Método para consultar espaços da SEGUNDA ETAPA conforme parâmetros de ID
-	public TableModel ConsultarEspacoSegundaID(String idPesquisa) throws SQLException, ParseException {
+	public TableModel consultarEspacoSegundaID(String idPesquisa) throws SQLException, ParseException {
 		int converteID = Integer.parseInt(idPesquisa);
-		return new GestaoEventosDAO().ConsultarEspacoSegundaID(converteID);			
+		return new GestaoEventosDAO().consultarEspacoSegundaID(converteID);			
 	}
 		
 	// Método para consultar espaços da PRIMEIRA ETAPA conforme parâmetros de nome
-	public TableModel ConsultarEspacoPrimeiraNome(String nomePessoa) throws SQLException, ParseException {
-		return new GestaoEventosDAO().ConsultarEspacoPrimeiraNome(nomePessoa);
+	public TableModel consultarEspacoPrimeiraNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().consultarEspacoPrimeiraNome(nomePessoa);
 	
 	}
 	
 	// Método para consultar espaços da SEGUNDA ETAPA conforme parâmetros de nome
-	public TableModel ConsultarEspacoSegundaNome(String nomePessoa) throws SQLException, ParseException {
-		return new GestaoEventosDAO().ConsultarEspacoSegundaNome(nomePessoa);
+	public TableModel consultarEspacoSegundaNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().consultarEspacoSegundaNome(nomePessoa);
 	
 	}
 	
 	// Método para visualizar a tabela de salas de eventos
-	public TableModel VisualizarSalas() throws SQLException, ParseException {
-		return new GestaoEventosDAO().VisualizarSalas();
+	public TableModel visualizarSalas() throws SQLException, ParseException {
+		return new GestaoEventosDAO().visualizarSalas();
 		
 	}
 	
 	// Método para consultar salas da PRIMEIRA ETAPA conforme parâmetros de ID
-	public TableModel ConsultarSalaPrimeiraID(String idPesquisa) throws SQLException, ParseException {
+	public TableModel consultarSalaPrimeiraID(String idPesquisa) throws SQLException, ParseException {
 		int converteID = Integer.parseInt(idPesquisa);
-		return new GestaoEventosDAO().ConsultarSalaPrimeiraID(converteID);
+		return new GestaoEventosDAO().consultarSalaPrimeiraID(converteID);
 	}
 	
 	
 	// Método para consultar salas da PRIMEIRA ETAPA conforme parâmetros de nome
-	public TableModel ConsultarSalaPrimeiraNome(String nomePessoa) throws SQLException, ParseException {
-		return new GestaoEventosDAO().ConsultarSalaPrimeiraNome(nomePessoa);
+	public TableModel consultarSalaPrimeiraNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().consultarSalaPrimeiraNome(nomePessoa);
 	}
 	
 	
 	// Método para consultar salas da SEGUNDA ETAPA conforme parâmetros de ID
-	public TableModel ConsultarSalaSegundaID(String idPesquisa) throws SQLException, ParseException {
+	public TableModel consultarSalaSegundaID(String idPesquisa) throws SQLException, ParseException {
 		int converteID = Integer.parseInt(idPesquisa);
-		return new GestaoEventosDAO().ConsultarSalaSegundaID(converteID);
+		return new GestaoEventosDAO().consultarSalaSegundaID(converteID);
 	}
 	
 	
 	// Método para consultar salas da SEGUNDA ETAPA conforme parâmetros de nome
-	public TableModel ConsultarSalaSegundaNome(String nomePessoa) throws SQLException, ParseException {
-		return new GestaoEventosDAO().ConsultarSalaSegundaNome(nomePessoa);
+	public TableModel consultarSalaSegundaNome(String nomePessoa) throws SQLException, ParseException {
+		return new GestaoEventosDAO().consultarSalaSegundaNome(nomePessoa);
 	}
 	
 	// Método para criação das tabelas no banco
-	public void CriarTabelas() throws SQLException, ParseException {
-		new GestaoEventosDAO().CriarTabelas();
+	public void criarTabelas() throws SQLException, ParseException {
+		new GestaoEventosDAO().criarTabelas();
 	}
 }

@@ -98,7 +98,7 @@ public class TelaCadastrarSala extends JFrame {
 						|| (tfLotacaoSala.getText() == null || tfLotacaoSala.getText().trim().isEmpty())) {
 						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 					} else {			
-					controller.CadastrarSalaEvento(tfNomeSala.getText(), tfLotacaoSala.getText());
+					controller.cadastrarSalaEvento(tfNomeSala.getText(), tfLotacaoSala.getText());
 					JOptionPane.showMessageDialog(null, "Sala de evento cadastrada com sucesso.");
 					tfNomeSala.setText("");
 					tfLotacaoSala.setText("");
