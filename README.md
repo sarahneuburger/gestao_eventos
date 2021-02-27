@@ -35,10 +35,7 @@ O projeto oferece o cadastro de informações para gestão de eventos. Cadastre 
 ## Configuração:
 Para iniciar a utilização do Sistema de Gestão de Eventos, é necessário configurar as informações do seu banco de dados: URL, usuário e senha na classe Conexão do projeto (SistemaGestaoEventos\src\connection\Conexao.java). Utilize a IDE de sua preferência para configurar estes dados.
 
-## Licença:
-Não se aplica.
-
 ## Autora:
-- Nome: Sarah Neuburger Brito.
+- Nome: Sarah Neuburger Brito
 - LinkedIn - linkedin.com/in/sarahneuburger
 - E-mail - sarah-n.b@hotmail.com
