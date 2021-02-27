@@ -55,35 +55,29 @@ public class TelaCadastrarEspaco extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel baseCadastrarEspaco = new JPanel();
 		contentPane.add(baseCadastrarEspaco, BorderLayout.CENTER);
-		baseCadastrarEspaco.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("10dlu"),
-				ColumnSpec.decode("70dlu"),
-				ColumnSpec.decode("150dlu"),
-				ColumnSpec.decode("30dlu"),},
-			new RowSpec[] {
-				RowSpec.decode("15dlu"),
-				RowSpec.decode("30dlu"),
-				RowSpec.decode("12dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("12dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("12dlu"),}));
-		
+		baseCadastrarEspaco.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("10dlu"), ColumnSpec.decode("70dlu"), ColumnSpec.decode("150dlu"),
+						ColumnSpec.decode("30dlu"), },
+				new RowSpec[] { RowSpec.decode("15dlu"), RowSpec.decode("30dlu"), RowSpec.decode("12dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("12dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						RowSpec.decode("12dlu"), }));
+
 		JLabel lblCadastrarEspaco = new JLabel("Cadastrar Espa\u00E7os de Caf\u00E9");
 		lblCadastrarEspaco.setFont(new Font("Tahoma", Font.BOLD, 14));
 		baseCadastrarEspaco.add(lblCadastrarEspaco, "2, 2, 2, 1");
-		
+
 		JLabel lblNomeEspaco = new JLabel("Nome:   ");
 		lblNomeEspaco.setHorizontalAlignment(SwingConstants.RIGHT);
 		baseCadastrarEspaco.add(lblNomeEspaco, "2, 4, right, default");
-		
+
 		tfNomeEspaco = new JTextField();
 		baseCadastrarEspaco.add(tfNomeEspaco, "3, 4, fill, default");
 		tfNomeEspaco.setColumns(10);
-		
+
+		// Botão "cadastrar" chama os método para insert no banco de dados
 		JButton btnCadastrarEspaco = new JButton("Cadastrar");
 		btnCadastrarEspaco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -92,9 +86,9 @@ public class TelaCadastrarEspaco extends JFrame {
 					if (tfNomeEspaco.getText() == null || tfNomeEspaco.getText().trim().isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 					} else {
-					controller.cadastrarEspacoCafe(tfNomeEspaco.getText());
-					JOptionPane.showMessageDialog(null, "Espaço de café cadastrada com sucesso.");
-					tfNomeEspaco.setText("");
+						controller.cadastrarEspacoCafe(tfNomeEspaco.getText());
+						JOptionPane.showMessageDialog(null, "Espaço de café cadastrada com sucesso.");
+						tfNomeEspaco.setText("");
 					}
 				} catch (SQLException erro) {
 					JOptionPane.showMessageDialog(null, "Falha ao cadastrar espaço de café.");

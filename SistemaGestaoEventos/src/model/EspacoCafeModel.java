@@ -1,9 +1,9 @@
 package model;
 
 public class EspacoCafeModel {
-	
+
 	private int idEspacoCafe;
-	
+
 	private String nomeEspacoCafe;
 
 	public int getIdEspacoCafe() {
@@ -26,12 +26,13 @@ public class EspacoCafeModel {
 		this.idEspacoCafe = idEspacoCafe;
 		this.nomeEspacoCafe = nomeEspacoCafe;
 	}
-	
+
 	public EspacoCafeModel(String nomeEspacoCafe) {
 		this.nomeEspacoCafe = nomeEspacoCafe;
 	}
+
 	public EspacoCafeModel() {
-		
+
 	}
 
 }

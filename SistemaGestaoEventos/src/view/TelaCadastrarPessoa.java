@@ -56,63 +56,49 @@ public class TelaCadastrarPessoa extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel baseTelaCadastrarPessoa = new JPanel();
 		contentPane.add(baseTelaCadastrarPessoa, BorderLayout.CENTER);
-		baseTelaCadastrarPessoa.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("15dlu"),
-				FormSpecs.DEFAULT_COLSPEC,
-				ColumnSpec.decode("default:grow"),
-				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				RowSpec.decode("10dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("8dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("10dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("10dlu"),}));
-		
+		baseTelaCadastrarPessoa.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("15dlu"), FormSpecs.DEFAULT_COLSPEC,
+						ColumnSpec.decode("default:grow"), ColumnSpec.decode("default:grow"), },
+				new RowSpec[] { RowSpec.decode("10dlu"), FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("8dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("8dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						RowSpec.decode("8dlu"), FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("8dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("8dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						RowSpec.decode("8dlu"), FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("10dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("10dlu"), }));
+
 		JLabel lblCadastrarPessoa = new JLabel("Cadastro de Pessoas");
 		lblCadastrarPessoa.setFont(new Font("Tahoma", Font.BOLD, 14));
 		baseTelaCadastrarPessoa.add(lblCadastrarPessoa, "2, 2");
-		
+
 		JLabel lblNomePessoa = new JLabel("Nome:   ");
 		lblNomePessoa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		baseTelaCadastrarPessoa.add(lblNomePessoa, "2, 4, right, default");
-		
+
 		tfCampoNome = new JTextField();
 		baseTelaCadastrarPessoa.add(tfCampoNome, "3, 4, fill, default");
 		tfCampoNome.setColumns(10);
-		
+
 		JLabel lblSobrenomePessoa = new JLabel("Sobrenome:   ");
 		lblSobrenomePessoa.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblSobrenomePessoa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		baseTelaCadastrarPessoa.add(lblSobrenomePessoa, "2, 6, right, default");
-		
+
 		tfCampoSobrenome = new JTextField();
 		tfCampoSobrenome.setColumns(10);
 		baseTelaCadastrarPessoa.add(tfCampoSobrenome, "3, 6, fill, default");
-		
+
 		JLabel lblSalaPrimeiraEtapa = new JLabel("Sala Evento 1\u00AA Etapa:   ");
 		lblSalaPrimeiraEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblSalaPrimeiraEtapa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		baseTelaCadastrarPessoa.add(lblSalaPrimeiraEtapa, "2, 8, right, default");
-		
+
 		tfCampoPrimeiraSala = new JTextField();
 		tfCampoPrimeiraSala.setColumns(10);
 		baseTelaCadastrarPessoa.add(tfCampoPrimeiraSala, "3, 8, fill, default");
-		
+
 		JLabel lblSalaSegundaEtapa = new JLabel("Sala Evento 2\u00AA Etapa:   ");
 		lblSalaSegundaEtapa.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblSalaSegundaEtapa.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -131,6 +117,7 @@ public class TelaCadastrarPessoa extends JFrame {
 		tfEspacoPrimeiraEtapa.setColumns(10);
 		baseTelaCadastrarPessoa.add(tfEspacoPrimeiraEtapa, "3, 12, fill, default");
 
+		// Botão "cadastrar" chama o método para insert no banco de dados
 		JButton btnCadastrarPessoa = new JButton("Cadastrar");
 		btnCadastrarPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

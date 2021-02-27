@@ -133,6 +133,7 @@ public class TelaConsultarEspacos extends JFrame {
 		JScrollPane tabela = new JScrollPane();
 		baseConsultarEspacos.add(tabela, "2, 12, fill, fill");
 
+		// Botão "pesquisar" chama os métodos para select conforme parâmetros
 		JButton btnPesquisarEspaco = new JButton("Pesquisar");
 		btnPesquisarEspaco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,6 +170,8 @@ public class TelaConsultarEspacos extends JFrame {
 		});
 		baseBotaoPesquisarEspaco.add(btnPesquisarEspaco, "4, 1");
 
+		// Ao abrir a tela de consultas, apresenta a tabela com todos os dados.
+		// Quando ocorre a consulta os dados são substituídos para apresentar o resultado da mesma
 		tabelaEspacos = new JTable();
 		tabelaEspacos.setModel(controller.visualizarEspacos());
 		tabela.setViewportView(tabelaEspacos);

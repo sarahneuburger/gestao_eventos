@@ -131,6 +131,7 @@ public class TelaConsultarPessoas extends JFrame {
 		JScrollPane tabela = new JScrollPane();
 		baseConsultarPessoas.add(tabela, "2, 10, fill, fill");
 		
+		// Botão "pesquisar" chama os métodos para select conforme parâmetros
 		JButton btnPesquisarPessoa = new JButton("Pesquisar");
 		btnPesquisarPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,6 +157,8 @@ public class TelaConsultarPessoas extends JFrame {
 		});
 		baseBotaoPesquisarPessoa.add(btnPesquisarPessoa, "4, 1");
 			
+		// Ao abrir a tela de consultas, apresenta a tabela com todos os dados.
+		// Quando ocorre a consulta os dados são substituídos para apresentar o resultado da mesma
 		tabelaPessoas = new JTable();
 		GestaoEventosController controller = new GestaoEventosController();
 		tabelaPessoas.setModel(controller.visualizarPessoas());

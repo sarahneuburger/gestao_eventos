@@ -59,33 +59,17 @@ public class TelaInicial extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		contentPane.add(panel, BorderLayout.NORTH);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("20dlu"),
-				ColumnSpec.decode("default:grow"),
-				ColumnSpec.decode("15dlu"),
-				ColumnSpec.decode("50dlu:grow"),
-				FormSpecs.DEFAULT_COLSPEC,
-				ColumnSpec.decode("20dlu"),},
-			new RowSpec[] {
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("5dlu"),
-				FormSpecs.DEFAULT_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+		panel.setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("20dlu"), ColumnSpec.decode("default:grow"),
+						ColumnSpec.decode("15dlu"), ColumnSpec.decode("50dlu:grow"), FormSpecs.DEFAULT_COLSPEC,
+						ColumnSpec.decode("20dlu"), },
+				new RowSpec[] { FormSpecs.DEFAULT_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("5dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("5dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						RowSpec.decode("5dlu"), FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("5dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("5dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						RowSpec.decode("5dlu"), FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("5dlu"),
+						FormSpecs.DEFAULT_ROWSPEC, RowSpec.decode("5dlu"), FormSpecs.DEFAULT_ROWSPEC,
+						RowSpec.decode("default:grow"), }));
 
 		JLabel lblCadastros = new JLabel("Cadastros");
 		lblCadastros.setHorizontalAlignment(SwingConstants.CENTER);
@@ -97,6 +81,7 @@ public class TelaInicial extends JFrame {
 		lblNewLabel_1.setIcon(new ImageIcon(TelaInicial.class.getResource("/img/imgTelaInicial3.png")));
 		panel.add(lblNewLabel_1, "4, 2, 2, 12, fill, fill");
 
+		// Botão chama a tela "Consultar Espaços de Café"
 		JButton btnConsultaEspacoCafe = new JButton("Espa\u00E7os de Caf\u00E9");
 		btnConsultaEspacoCafe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,6 +97,7 @@ public class TelaInicial extends JFrame {
 			}
 		});
 
+		// Botão chama a tela "Consultar Salas de Eventos"
 		JButton btnConsultaSalaEventos = new JButton("Sala de Eventos");
 		btnConsultaSalaEventos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,6 +113,7 @@ public class TelaInicial extends JFrame {
 			}
 		});
 
+		// Botão chama a tela "Consultar Pessoas"
 		JButton btnConsultaPessoa = new JButton("Pessoas");
 		btnConsultaPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -142,6 +129,7 @@ public class TelaInicial extends JFrame {
 			}
 		});
 
+		// Botão chama a tela "Cadastrar Pessoas"
 		JButton btnCadPessoa = new JButton("Pessoas");
 		btnCadPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -151,6 +139,7 @@ public class TelaInicial extends JFrame {
 		});
 		panel.add(btnCadPessoa, "2, 4");
 
+		// Botão chama a tela "Cadastrar Salas de Eventos"
 		JButton btnCadSalaEvento = new JButton("Sala de Eventos");
 		btnCadSalaEvento.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -160,6 +149,7 @@ public class TelaInicial extends JFrame {
 		});
 		panel.add(btnCadSalaEvento, "2, 6");
 
+		// Botão chama a tela "Cadastrar Espaços de Café"
 		JButton btnCadEspacoCafe = new JButton("Espa\u00E7os de Caf\u00E9");
 		btnCadEspacoCafe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,16 +172,19 @@ public class TelaInicial extends JFrame {
 		panel.add(lblTabelasIniciais, "4, 16");
 		panel.add(btnConsultaEspacoCafe, "2, 18");
 
+		// Botão chama o método para cadastrar as tabelas iniciais e suas respectivas colunas
 		JButton btnTabelasIniciais = new JButton("Tabelas Iniciais");
 		btnTabelasIniciais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GestaoEventosController controller = new GestaoEventosController();
 				try {
 					controller.criarTabelas();
-					JOptionPane.showMessageDialog(null, "Tabelas cadastradas com sucesso! Siga com a utilização do sistema. :)");
+					JOptionPane.showMessageDialog(null,
+							"Tabelas cadastradas com sucesso! Siga com a utilização do sistema. :)");
 				} catch (Exception erro) {
-					JOptionPane.showMessageDialog(null, "Falha ao cadastrar as tabelas. Contate a sua TI para verificar os dados de conexão com o banco "
-							+ "(SistemaGestaoEventos\\src\\connection\\Conexao.java");
+					JOptionPane.showMessageDialog(null,
+							"Falha ao cadastrar as tabelas. Contate a sua TI para verificar os dados de conexão com o banco "
+									+ "(SistemaGestaoEventos\\src\\connection\\Conexao.java");
 					System.out.println(erro.getMessage());
 				}
 			}
