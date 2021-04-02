@@ -39,3 +39,7 @@ Para iniciar a utilização do Sistema de Gestão de Eventos, é necessário con
 - Nome: Sarah Neuburger Brito
 - LinkedIn - linkedin.com/in/sarahneuburger
 - E-mail - sarah-n.b@hotmail.com
+
+## Observação:
+Favor desconsiderar o commit "GestaoDeTarefas", trata-se de outro sistema, realizado indevidamente o commit neste link.
+Para mais informações do mesmo acessar: https://github.com/sarahneuburger/gestao_de_tarefas.
